@@ -23,7 +23,7 @@ namespace GuguShop.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<ProductUpdateDto> UpdateProduct(ProductCreateDto updateDto)
+        public Task<ProductUpdateDto> UpdateProduct(ProductUpdateDto updateDto)
         {
             throw new NotImplementedException();
         }
