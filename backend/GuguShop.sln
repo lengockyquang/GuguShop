@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop", "GuguShop\GuguShop.csproj", "{AB16FB70-FA3A-454F-AB96-D445416E1A4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Domain", "GuguShop.Domain\GuguShop.Domain.csproj", "{A1E140A3-76DA-48FD-AA1E-459A36F99418}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Infrastructure", "GuguShop.Infrastructure\GuguShop.Infrastructure.csproj", "{D8E8426B-A71B-4411-A7FC-37A4504C5A26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Application", "GuguShop.Application\GuguShop.Application.csproj", "{7577D603-F5CF-471E-B5B9-F365FEE9B613}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Migrator", "GuguShop.Migrator\GuguShop.Migrator.csproj", "{92243A4A-517E-41CE-A2A3-F4683074C95F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB16FB70-FA3A-454F-AB96-D445416E1A4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB16FB70-FA3A-454F-AB96-D445416E1A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB16FB70-FA3A-454F-AB96-D445416E1A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB16FB70-FA3A-454F-AB96-D445416E1A4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1E140A3-76DA-48FD-AA1E-459A36F99418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1E140A3-76DA-48FD-AA1E-459A36F99418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1E140A3-76DA-48FD-AA1E-459A36F99418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1E140A3-76DA-48FD-AA1E-459A36F99418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8E8426B-A71B-4411-A7FC-37A4504C5A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8E8426B-A71B-4411-A7FC-37A4504C5A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8E8426B-A71B-4411-A7FC-37A4504C5A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8E8426B-A71B-4411-A7FC-37A4504C5A26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7577D603-F5CF-471E-B5B9-F365FEE9B613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7577D603-F5CF-471E-B5B9-F365FEE9B613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7577D603-F5CF-471E-B5B9-F365FEE9B613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7577D603-F5CF-471E-B5B9-F365FEE9B613}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92243A4A-517E-41CE-A2A3-F4683074C95F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92243A4A-517E-41CE-A2A3-F4683074C95F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92243A4A-517E-41CE-A2A3-F4683074C95F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92243A4A-517E-41CE-A2A3-F4683074C95F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,11 @@
+backend/GuguShop/bin/*
+backend/GuguShop/obj/*
+backend/GuguShop.Migrator/bin/*
+backend/GuguShop.Migrator/obj/*
+backend/GuguShop.Application/bin/*
+backend/GuguShop.Application/obj/*
+backend/GuguShop.Domain/bin/*
+backend/GuguShop.Domain/obj/*
+backend/GuguShop.Infrastructure/bin/*
+backend/GuguShop.Infrastructure/obj/*
+backend/.idea
