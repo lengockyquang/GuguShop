@@ -3,6 +3,7 @@ using System;
 using GuguShop.Migrator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuguShop.Migrator.Migrations
 {
     [DbContext(typeof(MigratorDbContext))]
-    partial class MigratorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211229135914_update-product-relation")]
+    partial class updateproductrelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
