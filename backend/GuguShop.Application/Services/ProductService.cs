@@ -39,9 +39,9 @@ namespace GuguShop.Application.Services
             return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductListDto>>(entities);
         }
 
-        public Task<ProductDto> GetProduct(Guid id)
+        public async Task<ProductDto> GetProduct(Guid id)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<Product, ProductDto>(await _productRepository.Get(id));
         }
     }
 }

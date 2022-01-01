@@ -11,7 +11,14 @@ namespace GuguShop.Application.Extensions
         public static IServiceCollection SetupApplication(this IServiceCollection serviceCollection)
         {
             serviceCollection.SetupAutoMapper(Assembly.GetExecutingAssembly());
+            serviceCollection.AddApplicationServices();
+            return serviceCollection;
+        }
+
+        private static IServiceCollection AddApplicationServices(this IServiceCollection serviceCollection)
+        {
             serviceCollection.AddScoped<IProductService, ProductService>();
+            serviceCollection.AddScoped<IManufacturerService, ManufacturerService>();
             return serviceCollection;
         }
 
