@@ -1,7 +1,15 @@
-﻿namespace GuguShop.Application.Dto
+﻿using System.Collections.Generic;
+
+namespace GuguShop.Application.Dto
 {
     public class ManufacturerDto
     {
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
         
+        public ICollection<ProductDto> Products { get; set; }
+
     }
 }
