@@ -7,8 +7,8 @@ namespace GuguShop.Application.Interfaces
 {
     public interface IProductService
     {
-        Task<ProductCreateDto> CreateProduct(ProductCreateDto createDto);
-        Task<ProductUpdateDto> UpdateProduct(ProductUpdateDto updateDto);
+        Task<ProductDto> CreateProduct(ProductCreateDto createDto);
+        Task<ProductDto> UpdateProduct(ProductUpdateDto updateDto);
         Task<Guid> RemoveProduct(Guid id);
         Task<IEnumerable<ProductListDto>> GetListProduct();
         Task<ProductDto> GetProduct(Guid id);

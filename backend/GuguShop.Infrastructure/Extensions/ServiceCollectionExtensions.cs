@@ -13,7 +13,7 @@ namespace GuguShop.Infrastructure.Extensions
         {
             serviceCollection.AddDbContext<GuguDbContext>(options =>
             {
-                options.UseSqlite(configuration.GetConnectionString("Default"));
+                options.UseSqlServer(configuration.GetConnectionString("Default"));
             });
             
             serviceCollection.AddTransient<IProductRepository, ProductRepository>();

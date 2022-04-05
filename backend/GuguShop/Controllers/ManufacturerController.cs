@@ -28,13 +28,13 @@ namespace GuguShop.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> HandleCreateAction(ManufacturerCreateDto createDto)
+        public async Task<IActionResult> HandleCreateAction([FromBody]ManufacturerCreateDto createDto)
         {
             return Ok(await _manufacturerService.CreateManufacturer(createDto));
         }
         
         [HttpPost("update/{id:guid}")]
-        public async Task<IActionResult> HandleUpdateAction(Guid id, ManufacturerUpdateDto updateDto)
+        public async Task<IActionResult> HandleUpdateAction(Guid id, [FromBody]ManufacturerUpdateDto updateDto)
         {
             return Ok(await _manufacturerService.UpdateManufacturer(updateDto));
         }

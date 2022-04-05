@@ -15,8 +15,8 @@ namespace GuguShop.Domain.Base.Repositories
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "");
-        Task<TEntity> Create(TEntity entity);
-        Task<TEntity> Update(TEntity entity);
-        Task<TKey> Delete(TKey id);
+        Task<TEntity> Create(TEntity entity, bool autoSave = false);
+        Task<TEntity> Update(TEntity entity, bool autoSave = false);
+        Task<TKey> Delete(TEntity id, bool autoSave = false);
     }
 }

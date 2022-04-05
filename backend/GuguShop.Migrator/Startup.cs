@@ -25,7 +25,7 @@ public class Startup
             var migrationsAssembly = typeof(Startup).Assembly.GetName().Name;
 
             services.AddDbContext<MigratorDbContext>(
-                options => { options.UseSqlite(Configuration.GetConnectionString("Default"), 
+                options => { options.UseSqlServer(Configuration.GetConnectionString("Default"), 
                     b => b.MigrationsAssembly(migrationsAssembly)); }
             );
 

@@ -32,5 +32,6 @@ namespace GuguShop.Application.Extensions
 
             return serviceCollection;
         }
+
     }
 }

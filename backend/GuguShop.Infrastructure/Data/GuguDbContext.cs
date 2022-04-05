@@ -10,8 +10,8 @@ namespace GuguShop.Infrastructure.Data
         {
         }
 
-        public DbSet<Manufacturer> Manufacturers { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Manufacturer> Manufacturer { get; set; }
+        public DbSet<Product> Product { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

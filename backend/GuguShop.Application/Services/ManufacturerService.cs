@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using GuguShop.Application.Dto;
@@ -13,7 +14,6 @@ namespace GuguShop.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly IManufacturerRepository _manufacturerRepository;
-        // todo implement unit of work
         public ManufacturerService(IMapper mapper, IManufacturerRepository manufacturerRepository)
         {
             _mapper = mapper;
@@ -22,24 +22,32 @@ namespace GuguShop.Application.Services
         public async Task<ManufacturerDto> CreateManufacturer(ManufacturerCreateDto createDto)
         {
             var createEntity = _mapper.Map<ManufacturerCreateDto, Manufacturer>(createDto);
-            var entity = await _manufacturerRepository.Create(createEntity);
+            var entity = await _manufacturerRepository.Create(createEntity, true);
             return _mapper.Map<Manufacturer, ManufacturerDto>(entity);
         }
 
-        public Task<ManufacturerDto> UpdateManufacturer(ManufacturerUpdateDto updateDto)
+        public async Task<ManufacturerDto> UpdateManufacturer(ManufacturerUpdateDto updateDto)
         {
-            throw new NotImplementedException();
-        }
+            var updateEntity = _mapper.Map<ManufacturerUpdateDto, Manufacturer>(updateDto);
+            var entity = await _manufacturerRepository.Create(updateEntity, true);
+            return _mapper.Map<Manufacturer, ManufacturerDto>(entity);        }
 
-        public Task<Guid> RemoveManufacturer(Guid id)
+        public async Task<Guid> RemoveManufacturer(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await _manufacturerRepository.Get(id);
+            if (entity == null)
+            {
+                throw new Exception("Không tìm thấy entity với id " + id);
+            }
+
+            await _manufacturerRepository.Delete(entity, true);
+            return entity.Id;        
         }
 
         public async Task<IEnumerable<ManufacturerListDto>> GetListManufacturer()
         {
             var entities = await _manufacturerRepository.GetWithSpecification();
-            return _mapper.Map<IEnumerable<Manufacturer>, IEnumerable<ManufacturerListDto>>(entities);
+            return _mapper.Map<ICollection<Manufacturer>, ICollection<ManufacturerListDto>>(entities.ToList());
         }
 
         public async Task<ManufacturerDto> GetManufacturer(Guid id)

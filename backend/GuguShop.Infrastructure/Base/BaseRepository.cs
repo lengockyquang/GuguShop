@@ -53,13 +53,14 @@ namespace GuguShop.Infrastructure.Base
             return await query.ToListAsync();
         }
 
-        public async Task<TEntity> Create(TEntity entity)
+        public async Task<TEntity> Create(TEntity entity, bool autoSave = false)
         {
             await _dbContext.Set<TEntity>().AddAsync(entity);
+            if (autoSave == true) await _dbContext.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public async Task<TEntity> Update(TEntity entity, bool autoSave = false)
         {
             var isExist = await _dbContext.Set<TEntity>().AnyAsync(x => x.Id.Equals(entity.Id));
             if (!isExist)
@@ -67,18 +68,16 @@ namespace GuguShop.Infrastructure.Base
                 throw new Exception("Can not find entity with id " + entity.Id);
             }
             _dbContext.Set<TEntity>().Update(entity);
+            if (autoSave == true) await _dbContext.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<TKey> Delete(TKey id)
+        public async Task<TKey> Delete(TEntity entity, bool autoSave = false)
         {
-            var entity = await Get(id);
-            if (entity == null)
-            {
-                throw new Exception("Can not find entity with id " + id);
-            }
+            await Task.CompletedTask;
             _dbContext.Set<TEntity>().Remove(entity);
-            return id;
+            if (autoSave == true) await _dbContext.SaveChangesAsync();
+            return entity.Id;
         }
     }
 }

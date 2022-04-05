@@ -18,24 +18,35 @@ namespace GuguShop.Application.Services
             _productRepository = productRepository;
             _mapper = mapper;
         }
-        public Task<ProductCreateDto> CreateProduct(ProductCreateDto createDto)
+        public async Task<ProductDto> CreateProduct(ProductCreateDto createDto)
         {
-            throw new NotImplementedException();
+            var createEntity = _mapper.Map<ProductCreateDto, Product>(createDto);
+            var entity = await _productRepository.Create(createEntity, true);
+            return _mapper.Map<Product, ProductDto>(entity);
         }
 
-        public Task<ProductUpdateDto> UpdateProduct(ProductUpdateDto updateDto)
+        public async Task<ProductDto> UpdateProduct(ProductUpdateDto updateDto)
         {
-            throw new NotImplementedException();
+            var updateEntity = _mapper.Map<ProductUpdateDto, Product>(updateDto);
+            var entity = await _productRepository.Update(updateEntity, true);
+            return _mapper.Map<Product, ProductDto>(entity);
         }
 
-        public Task<Guid> RemoveProduct(Guid id)
+        public async Task<Guid> RemoveProduct(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await _productRepository.Get(id);
+            if (entity == null)
+            {
+                throw new Exception("Không tìm thấy entity với id " + id);
+            }
+
+            await _productRepository.Delete(entity, true);
+            return entity.Id;
         }
 
         public async Task<IEnumerable<ProductListDto>> GetListProduct()
         {
-            var entities = await _productRepository.GetWithSpecification();
+            var entities = await _productRepository.GetWithSpecification(null ,null, "Manufacturer");
             return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductListDto>>(entities);
         }
 
