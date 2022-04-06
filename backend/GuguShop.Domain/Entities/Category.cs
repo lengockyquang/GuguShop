@@ -6,6 +6,7 @@ namespace GuguShop.Domain.Entities
 {
     public class Category: Entity<Guid>
     {
+        public string Code { get; set; }
         public string Name { get; set; }
         
         public ICollection<Product> Products { get; set; }

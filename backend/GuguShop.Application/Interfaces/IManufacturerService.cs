@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using GuguShop.Application.Dto;
+﻿using GuguShop.Application.Dto;
+using GuguShop.Domain.Entities;
 
 namespace GuguShop.Application.Interfaces
 {
-    public interface IManufacturerService
+    public interface IManufacturerService: IBaseEntityService<Manufacturer, ManufacturerDto, ManufacturerListDto, ManufacturerCreateDto, ManufacturerUpdateDto>
     {
-        Task<ManufacturerDto> CreateManufacturer(ManufacturerCreateDto createDto);
-        Task<ManufacturerDto> UpdateManufacturer(ManufacturerUpdateDto updateDto);
-        Task<Guid> RemoveManufacturer(Guid id);
-        Task<IEnumerable<ManufacturerListDto>> GetListManufacturer();
-        Task<ManufacturerDto> GetManufacturer(Guid id);
+        
     }
 }

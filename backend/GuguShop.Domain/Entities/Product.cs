@@ -9,7 +9,8 @@ namespace GuguShop.Domain.Entities
         public string Code { get; set; }
         public string Name { get; set; }
         
-        public ICollection<Category> Categories { get; set; }
+        public Guid CategoryId { get; set; }
+        public Category Category { get; set; }
         
         public Guid ManufacturerId { get; set; }
         public Manufacturer Manufacturer { get; set; }

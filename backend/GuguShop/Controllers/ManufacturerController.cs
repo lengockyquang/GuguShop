@@ -18,31 +18,31 @@ namespace GuguShop.Controllers
         [HttpGet("index")]
         public async Task<IActionResult> HandleIndexAction()
         {
-            return Ok(await _manufacturerService.GetListManufacturer());
+            return Ok(await _manufacturerService.GetListAsync());
         }
         
         [HttpGet("show/{id:guid}")]
         public async Task<IActionResult> HandleShowAction(Guid id)
         {
-            return Ok(await _manufacturerService.GetManufacturer(id));
+            return Ok(await _manufacturerService.GetAsync(id));
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> HandleCreateAction([FromBody]ManufacturerCreateDto createDto)
         {
-            return Ok(await _manufacturerService.CreateManufacturer(createDto));
+            return Ok(await _manufacturerService.CreateAsync(createDto));
         }
         
         [HttpPost("update/{id:guid}")]
         public async Task<IActionResult> HandleUpdateAction(Guid id, [FromBody]ManufacturerUpdateDto updateDto)
         {
-            return Ok(await _manufacturerService.UpdateManufacturer(updateDto));
+            return Ok(await _manufacturerService.UpdateAsync(updateDto));
         }
 
         [HttpDelete("delete/{id:guid}")]
         public async Task<IActionResult> HandleDeleteAction(Guid id)
         {
-            return Ok(await _manufacturerService.RemoveManufacturer(id));
+            return Ok(await _manufacturerService.RemoveAsync(id));
         }
     }
 }

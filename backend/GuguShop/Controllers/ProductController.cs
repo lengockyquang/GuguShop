@@ -18,31 +18,31 @@ namespace GuguShop.Controllers
         [HttpGet("index")]
         public async Task<IActionResult> HandleIndexAction()
         {
-            return Ok(await _productService.GetListProduct());
+            return Ok(await _productService.GetListAsync());
         }
         
         [HttpGet("show/{id:guid}")]
         public async Task<IActionResult> HandleShowAction(Guid id)
         {
-            return Ok(await _productService.GetProduct(id));
+            return Ok(await _productService.GetAsync(id));
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> HandleCreateAction([FromBody] ProductCreateDto createDto)
         {
-            return Ok(await _productService.CreateProduct(createDto));
+            return Ok(await _productService.CreateAsync(createDto));
         }
         
         [HttpPost("update/{id:guid}")]
         public async Task<IActionResult> HandleUpdateAction(Guid id, ProductUpdateDto updateDto)
         {
-            return Ok(await _productService.UpdateProduct(updateDto));
+            return Ok(await _productService.UpdateAsync(updateDto));
         }
 
         [HttpDelete("delete/{id:guid}")]
         public async Task<IActionResult> HandleDeleteAction(Guid id)
         {
-            return Ok(await _productService.RemoveProduct(id));
+            return Ok(await _productService.RemoveAsync(id));
         }
 
     }
