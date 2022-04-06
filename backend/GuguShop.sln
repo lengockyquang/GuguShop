@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Application", "Gug
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Migrator", "GuguShop.Migrator\GuguShop.Migrator.csproj", "{92243A4A-517E-41CE-A2A3-F4683074C95F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.GridFsApplication", "GuguShop.GridFsApplication\GuguShop.GridFsApplication.csproj", "{A54C3416-17A4-4A07-9250-0C9C538C3E4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{92243A4A-517E-41CE-A2A3-F4683074C95F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92243A4A-517E-41CE-A2A3-F4683074C95F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92243A4A-517E-41CE-A2A3-F4683074C95F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A54C3416-17A4-4A07-9250-0C9C538C3E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A54C3416-17A4-4A07-9250-0C9C538C3E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A54C3416-17A4-4A07-9250-0C9C538C3E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A54C3416-17A4-4A07-9250-0C9C538C3E4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -10,5 +10,8 @@ backend/GuguShop.Infrastructure/bin/*
 backend/GuguShop.Infrastructure/obj/*
 backend/.idea
 
+**/bin/*
+**/obj/*
+
 frontend/node_modules/*
 frontend/package-lock.json
