@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using GuguShop.Domain.Base.Entities;
 using GuguShop.Domain.Base.Repositories;
@@ -25,12 +26,12 @@ namespace GuguShop.Infrastructure.Base
             return isTracking ? _dbContext.Set<TEntity>().AsQueryable() : _dbContext.Set<TEntity>().AsNoTracking().AsQueryable();
         }
 
-        public async Task<TEntity> Get(TKey id)
+        public async Task<TEntity> Get(TKey id, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Set<TEntity>().FindAsync(id);
+            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(x=>x.Id.Equals(id), cancellationToken);
         }
 
-        public async Task<IEnumerable<TEntity>> GetWithSpecification(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+        public async Task<IEnumerable<TEntity>> GetWithSpecification(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "", CancellationToken cancellationToken = default)
         {
             var query = _dbContext.Set<TEntity>().AsQueryable();
 
@@ -47,10 +48,10 @@ namespace GuguShop.Infrastructure.Base
 
             if (orderBy != null)
             {
-                return await orderBy(query).ToListAsync();
+                return await orderBy(query).ToListAsync(cancellationToken);
             }
 
-            return await query.ToListAsync();
+            return await query.ToListAsync(cancellationToken);
         }
 
         public async Task<TEntity> Create(TEntity entity, bool autoSave = false)

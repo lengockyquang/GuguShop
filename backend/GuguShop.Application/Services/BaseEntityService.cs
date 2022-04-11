@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using GuguShop.Application.Dto;
@@ -45,17 +46,18 @@ namespace GuguShop.Application.Services
             }
 
             await _baseRepository.Delete(entity, true);
-            return entity.Id;            }
+            return entity.Id;            
+        }
 
-        public async Task<IEnumerable<TEntityListDto>> GetListAsync()
+        public async Task<IEnumerable<TEntityListDto>> GetListAsync(CancellationToken cancellation = default)
         {
-            var entities = await _baseRepository.GetWithSpecification();
+            var entities = await _baseRepository.GetWithSpecification(null,null,"",cancellation);
             return _mapper.Map<IEnumerable<TEntity>, IEnumerable<TEntityListDto>>(entities);        
         }
 
-        public async Task<TEntityDto> GetAsync(Guid id)
+        public async Task<TEntityDto> GetAsync(Guid id,CancellationToken cancellation = default)
         {
-            return _mapper.Map<TEntity, TEntityDto>(await _baseRepository.Get(id));
+            return _mapper.Map<TEntity, TEntityDto>(await _baseRepository.Get(id, cancellation));
         }
     }
 }

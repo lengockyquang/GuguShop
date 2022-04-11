@@ -16,15 +16,15 @@ namespace GuguShop.Controllers
         }
         
         [HttpGet("index")]
-        public async Task<IActionResult> HandleIndexAction()
+        public async Task<IActionResult> HandleIndexAction(CancellationToken cancellationToken = default)
         {
-            return Ok(await _productService.GetListAsync());
+            return Ok(await _productService.GetListAsync(cancellationToken));
         }
         
         [HttpGet("show/{id:guid}")]
-        public async Task<IActionResult> HandleShowAction(Guid id)
+        public async Task<IActionResult> HandleShowAction(Guid id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _productService.GetAsync(id));
+            return Ok(await _productService.GetAsync(id, cancellationToken));
         }
 
         [HttpPost("create")]

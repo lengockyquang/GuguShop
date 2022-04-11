@@ -24,7 +24,7 @@ public class FileController : Controller
     }
     
     [HttpPost("upload")]
-    [RequestSizeLimit(1024 * 1024 * 1024)]       //unit is bytes => 500Mb
+    [RequestSizeLimit(1024 * 1024 * 1024)]       //unit is bytes => 1gb
     public async Task<ActionResult> HandleUploadAction(IFormFile file)
     {
         var bucket = new GridFSBucket(_baseMongoClient.GetMongoDatabase(), _bucketOptions);
