@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.3" />
+        <PackageReference Include="MongoDB.Driver.GridFS" Version="2.15.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
@@ -18,6 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\GuguShop.Application\GuguShop.Application.csproj" />
+      <ProjectReference Include="..\GuguShop.GridFsApplication\GuguShop.GridFsApplication.csproj" />
       <ProjectReference Include="..\GuguShop.Infrastructure\GuguShop.Infrastructure.csproj" />
     </ItemGroup>
 

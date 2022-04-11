@@ -1,4 +1,5 @@
 using GuguShop.Application.Extensions;
+using GuguShop.GridFsApplication.Extensions;
 using GuguShop.Infrastructure.Extensions;
 using Newtonsoft.Json;
 
@@ -13,6 +14,7 @@ builder.Services.AddControllers()
 
 builder.Services.SetupInfrastructure(builder.Configuration);
 builder.Services.SetupApplication();
+builder.Services.SetupMongoGridFs(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

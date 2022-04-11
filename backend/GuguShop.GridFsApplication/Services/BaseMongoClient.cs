@@ -1,7 +1,6 @@
 ﻿using GuguShop.GridFsApplication.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using MongoPractices.Services;
 
 namespace GuguShop.GridFsApplication.Services;
 
@@ -10,12 +9,10 @@ public class BaseMongoClient: IBaseMongoClient
     private readonly MongoClient _client;
     private readonly IMongoDatabase _database;
     
-    public BaseMongoClient(IOptions<MongoConfiguration> mongoConfiguration)
+    public BaseMongoClient(string connectionString, string defaultDatabaseName)
     {
-        _client = new MongoClient(
-            mongoConfiguration.Value.ConnectionString);
-        _database = _client.GetDatabase(
-            mongoConfiguration.Value.DefaultDatabaseName);
+        _client = new MongoClient(connectionString);
+        _database = _client.GetDatabase(defaultDatabaseName);
     }
 
     public MongoClient GetMongoClient()

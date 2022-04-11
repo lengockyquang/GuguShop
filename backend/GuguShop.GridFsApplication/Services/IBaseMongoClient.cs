@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace MongoPractices.Services
+namespace GuguShop.GridFsApplication.Services
 {
     public interface IBaseMongoClient
     {
