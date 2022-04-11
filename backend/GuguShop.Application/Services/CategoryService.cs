@@ -1,8 +1,6 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
-using GuguShop.Domain.Base.Repositories;
 using GuguShop.Domain.Entities;
 using GuguShop.Domain.Repositories;
 

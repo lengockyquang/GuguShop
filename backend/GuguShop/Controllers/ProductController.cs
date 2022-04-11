@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using GuguShop.Application.Dto;
+﻿using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers
 {
+    [ApiController]
     [Route("/api/product")]
     public class ProductController : Controller
     {

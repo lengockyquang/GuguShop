@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers
 {
+    [ApiController]
     [Route("/api/manufacturer")]
     public class ManufacturerController: Controller
     {

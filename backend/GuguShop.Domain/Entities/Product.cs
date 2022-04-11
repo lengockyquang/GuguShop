@@ -14,6 +14,8 @@ namespace GuguShop.Domain.Entities
         
         public Guid ManufacturerId { get; set; }
         public Manufacturer Manufacturer { get; set; }
+        
+        public ICollection<Tag> Tags { get; set; }
 
     }
 }
