@@ -24,20 +24,20 @@ namespace GuguShop.Application.Services
             _mapper = mapper;
             _baseRepository = baseRepository;
         }
-        public async Task<TEntityDto> CreateAsync(TEntityCreateDto createDto)
+        public virtual async Task<TEntityDto> CreateAsync(TEntityCreateDto createDto)
         {
             var createEntity = _mapper.Map<TEntityCreateDto, TEntity>(createDto);
             var entity = await _baseRepository.Create(createEntity, true);
             return _mapper.Map<TEntity,TEntityDto>(entity);
         }
 
-        public async Task<TEntityDto> UpdateAsync(TEntityUpdateDto updateDto)
+        public virtual async Task<TEntityDto> UpdateAsync(TEntityUpdateDto updateDto)
         {
             var updateEntity = _mapper.Map<TEntityUpdateDto, TEntity>(updateDto);
             var entity = await _baseRepository.Update(updateEntity, true);
             return _mapper.Map<TEntity,TEntityDto>(entity);        }
 
-        public async Task<Guid> RemoveAsync(Guid id)
+        public virtual async Task<Guid> RemoveAsync(Guid id)
         {
             var entity = await _baseRepository.Get(id);
             if (entity == null)
@@ -49,13 +49,13 @@ namespace GuguShop.Application.Services
             return entity.Id;            
         }
 
-        public async Task<IEnumerable<TEntityListDto>> GetListAsync(CancellationToken cancellation = default)
+        public virtual async Task<IEnumerable<TEntityListDto>> GetListAsync(CancellationToken cancellation = default)
         {
             var entities = await _baseRepository.GetWithSpecification(null,null,"",cancellation);
             return _mapper.Map<IEnumerable<TEntity>, IEnumerable<TEntityListDto>>(entities);        
         }
 
-        public async Task<TEntityDto> GetAsync(Guid id,CancellationToken cancellation = default)
+        public virtual async Task<TEntityDto> GetAsync(Guid id,CancellationToken cancellation = default)
         {
             return _mapper.Map<TEntity, TEntityDto>(await _baseRepository.Get(id, cancellation));
         }

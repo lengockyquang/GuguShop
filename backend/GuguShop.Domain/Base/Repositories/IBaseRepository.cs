@@ -20,5 +20,7 @@ namespace GuguShop.Domain.Base.Repositories
         Task<TEntity> Create(TEntity entity, bool autoSave = false);
         Task<TEntity> Update(TEntity entity, bool autoSave = false);
         Task<TKey> Delete(TEntity id, bool autoSave = false);
+
+        Task SaveChangeAsync();
     }
 }

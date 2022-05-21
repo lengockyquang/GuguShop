@@ -15,5 +15,7 @@ namespace GuguShop.Application.Dto
         
         public Guid ManufacturerId { get; set; }
         public ManufacturerDto Manufacturer { get; set; }
+        
+        public ICollection<TagDto> Tags { get; set; }
     }
 }

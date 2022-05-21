@@ -23,7 +23,7 @@ public class FileController : Controller
         };
     }
     
-    [HttpPost("upload")]
+    [HttpPost("upload-mongo")]
     [RequestSizeLimit(1024 * 1024 * 1024)]       //unit is bytes => 1gb
     public async Task<ActionResult> HandleUploadAction(IFormFile file)
     {

@@ -1,6 +1,7 @@
 ﻿using GuguShop.Domain.Repositories;
 using GuguShop.Infrastructure.Data;
 using GuguShop.Infrastructure.Repositories;
+using GuguShop.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,9 @@ namespace GuguShop.Infrastructure.Extensions
             serviceCollection.AddTransient<IProductRepository, ProductRepository>();
             serviceCollection.AddTransient<ICategoryRepository, CategoryRepository>();
             serviceCollection.AddTransient<IManufacturerRepository, ManufacturerRepository>();
+            serviceCollection.AddTransient<ITagRepository, TagRepository>();
+
+            serviceCollection.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
             return serviceCollection;
         }
     }

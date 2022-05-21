@@ -19,6 +19,8 @@ namespace GuguShop.Application.Extensions
         {
             serviceCollection.AddScoped<IProductService, ProductService>();
             serviceCollection.AddScoped<IManufacturerService, ManufacturerService>();
+            serviceCollection.AddScoped<ICategoryService, CategoryService>();
+            serviceCollection.AddScoped<ITagService, TagService>();
             return serviceCollection;
         }
 

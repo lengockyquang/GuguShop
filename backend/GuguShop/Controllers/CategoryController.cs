@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers;
 
+[Route("api/category")]
 [ApiController]
 public class CategoryController: Controller
 {

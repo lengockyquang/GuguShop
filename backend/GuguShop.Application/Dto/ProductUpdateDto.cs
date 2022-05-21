@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GuguShop.Application.Dto
 {
@@ -10,5 +11,6 @@ namespace GuguShop.Application.Dto
         
         public Guid ManufacturerId { get; set; }
         public Guid CategoryId { get; set; }
+        public ICollection<Guid> TagIds { get; set; }
     }
 }

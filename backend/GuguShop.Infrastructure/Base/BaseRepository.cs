@@ -80,5 +80,10 @@ namespace GuguShop.Infrastructure.Base
             if (autoSave == true) await _dbContext.SaveChangesAsync();
             return entity.Id;
         }
+
+        public async Task SaveChangeAsync()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
