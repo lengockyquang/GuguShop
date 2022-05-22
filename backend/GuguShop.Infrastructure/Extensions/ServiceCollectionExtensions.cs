@@ -2,6 +2,7 @@
 using GuguShop.Infrastructure.Data;
 using GuguShop.Infrastructure.Repositories;
 using GuguShop.Infrastructure.UnitOfWork;
+using GuguShop.Infrastructure.Utility;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,8 @@ namespace GuguShop.Infrastructure.Extensions
             serviceCollection.AddTransient<ITagRepository, TagRepository>();
 
             serviceCollection.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
+
+            serviceCollection.AddScoped<ICryptoService, CryptoService>();
             return serviceCollection;
         }
     }
