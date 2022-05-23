@@ -1,4 +1,5 @@
-﻿using GuguShop.Application.Dto;
+﻿using System.Diagnostics;
+using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,13 @@ public class CategoryController: Controller
     public async Task<IActionResult> HandleCreateAction([FromBody]CategoryCreateDto createDto)
     {
         return Ok(await _categoryService.CreateAsync(createDto));
+    }
+    
+    [HttpPost("create-sample/{maxNumber:int}")]
+    public async Task<IActionResult> HandleCreateSampleAction(int maxNumber)
+    {
+        await _categoryService.InsertSampleData(maxNumber);
+        return Ok();
     }
         
     [HttpPost("update/{id:guid}")]

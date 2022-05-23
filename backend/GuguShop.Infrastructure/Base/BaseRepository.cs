@@ -61,16 +61,28 @@ namespace GuguShop.Infrastructure.Base
             return entity;
         }
 
+        public virtual async Task<ICollection<TEntity>> CreateRange(ICollection<TEntity> entities, bool autoSave = false)
+        {
+            await _dbContext.Set<TEntity>().AddRangeAsync(entities);
+            if (autoSave == true)
+            {
+                await _dbContext.SaveChangesAsync();
+            }
+            return entities;
+        }
+
         public async Task<TEntity> Update(TEntity entity, bool autoSave = false)
         {
-            var isExist = await _dbContext.Set<TEntity>().AnyAsync(x => x.Id.Equals(entity.Id));
-            if (!isExist)
-            {
-                throw new Exception("Can not find entity with id " + entity.Id);
-            }
             _dbContext.Set<TEntity>().Update(entity);
             if (autoSave == true) await _dbContext.SaveChangesAsync();
             return entity;
+        }
+
+        public async Task<ICollection<TEntity>> UpdateRange(ICollection<TEntity> entities, bool autoSave = false)
+        {
+            _dbContext.Set<TEntity>().UpdateRange(entities);
+            if (autoSave == true) await _dbContext.SaveChangesAsync();
+            return entities;
         }
 
         public async Task<TKey> Delete(TEntity entity, bool autoSave = false)

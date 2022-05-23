@@ -9,6 +9,7 @@ namespace GuguShop.Infrastructure.Utility;
 public class CryptoService: ICryptoService
 {
         //https://stackoverflow.com/questions/10168240/encrypting-decrypting-a-string-in-c-sharp
+        //https://github.com/2Toad/Rijndael256/issues/13
         
         // This constant is used to determine the keysize of the encryption algorithm in bits.
         // We divide this by 8 within the code below to get the equivalent number of bytes.
