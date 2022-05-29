@@ -9,6 +9,7 @@ backend/GuguShop.Domain/obj/*
 backend/GuguShop.Infrastructure/bin/*
 backend/GuguShop.Infrastructure/obj/*
 backend/.idea
+backend/.vs/*
 
 **/bin/*
 **/obj/*
