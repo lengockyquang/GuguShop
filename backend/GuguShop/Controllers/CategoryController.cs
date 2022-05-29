@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
+using GuguShop.Domain.Entities;
+using GuguShop.Infrastructure.Specification;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers;
@@ -16,9 +18,10 @@ public class CategoryController: Controller
     }
     
     [HttpGet("index")]
-    public async Task<IActionResult> HandleIndexAction(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> HandleIndexAction(int limit, int offset, CancellationToken cancellationToken = default)
     {
-        return Ok(await _categoryService.GetListAsync(cancellationToken));
+        var specification = new Specification<Category>(limit, offset);
+        return Ok(await _categoryService.GetListAsync(cancellationToken, specification));
     }
         
     [HttpGet("show/{id:guid}")]

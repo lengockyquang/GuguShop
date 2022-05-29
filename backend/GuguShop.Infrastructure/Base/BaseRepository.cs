@@ -11,9 +11,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GuguShop.Infrastructure.Base
 {
-    public class BaseRepository<TKey, TEntity, TDbContext>: IBaseRepository<TKey,TEntity>
-        where TEntity: Entity<TKey>
-        where TDbContext: DbContext
+    public class BaseRepository<TKey, TEntity, TDbContext> : IBaseRepository<TKey, TEntity>
+        where TEntity : Entity<TKey>
+        where TDbContext : DbContext
     {
         private readonly TDbContext _dbContext;
         public BaseRepository(TDbContext dbContext)
@@ -28,12 +28,12 @@ namespace GuguShop.Infrastructure.Base
 
         public async Task<TEntity> Get(TKey id, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(x=>x.Id.Equals(id), cancellationToken);
+            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(x => x.Id.Equals(id), cancellationToken);
         }
 
         public async Task<bool> Any(TKey id, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Set<TEntity>().AnyAsync(x=>x.Id.Equals(id), cancellationToken);
+            return await _dbContext.Set<TEntity>().AnyAsync(x => x.Id.Equals(id), cancellationToken);
         }
 
         public async Task<IEnumerable<TEntity>> GetWithSpecification(Expression<Func<TEntity, bool>> filter = null,
@@ -54,24 +54,29 @@ namespace GuguShop.Infrastructure.Base
             {
                 query = query.AsNoTrackingWithIdentityResolution();
             }
-            
+
             if (filter != null)
             {
                 query = query.Where(filter);
             }
 
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            if (!string.IsNullOrEmpty(includeProperties))
             {
-                query = query.Include(includeProperty.Trim());
+                foreach (var includeProperty in includeProperties.Split
+                    (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty.Trim());
+                }
+
             }
+
 
             if (Offset != 0)
             {
                 query = query.Skip(Offset);
             }
 
-            if(Limit.HasValue && Limit.Value != -1)
+            if (Limit.HasValue && Limit.Value != -1)
             {
                 query = query.Take(Limit.Value);
             }

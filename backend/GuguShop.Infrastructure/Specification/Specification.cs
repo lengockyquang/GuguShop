@@ -15,6 +15,13 @@ public class Specification<TEntity> where TEntity: Entity<Guid>
     public int Limit { get; set; } = -1;
     public int Offset { get; set; } = 0;
 
+
+    public Specification(int limit, int offset)
+    {
+        Limit = limit;
+        Offset = offset;
+    }
+    
     public Specification(Expression<Func<TEntity, bool>> filter,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order, string includeProperties, bool asNoTracking = false,
         bool asNoTrackingWithIdentityResolution = false)
