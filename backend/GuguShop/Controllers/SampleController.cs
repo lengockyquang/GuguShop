@@ -53,6 +53,18 @@ public class SampleController: Controller
         return Ok();
     }
 
+    [HttpGet("get-rand-number")]
+    public IActionResult HandleGetRandomInteger()
+    {
+        var value = GetRandomInteger(); 
+        return Ok(value.Result);
+    }
+
+    private static async Task<int> GetRandomInteger()
+    {
+        return await Task.FromResult(new Random().Next());
+    }
+
     private static async Task NormalTask(string taskName)
     {
         await Task.Delay(5000);

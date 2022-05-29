@@ -37,7 +37,7 @@ namespace GuguShop.Controllers
         [HttpPost("update/{id:guid}")]
         public async Task<IActionResult> HandleUpdateAction(Guid id, [FromBody]ManufacturerUpdateDto updateDto)
         {
-            return Ok(await _manufacturerService.UpdateAsync(updateDto));
+            return Ok(await _manufacturerService.UpdateAsync(id,updateDto));
         }
 
         [HttpDelete("delete/{id:guid}")]

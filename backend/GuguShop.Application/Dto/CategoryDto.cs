@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using GuguShop.Domain.Entities;
 
 namespace GuguShop.Application.Dto

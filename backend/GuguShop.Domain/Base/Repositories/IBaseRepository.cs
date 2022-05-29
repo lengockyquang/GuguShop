@@ -12,10 +12,15 @@ namespace GuguShop.Domain.Base.Repositories
     
         IQueryable<TEntity> GetQueryable(bool isTracking = true);
         Task<TEntity> Get(TKey id, CancellationToken cancellationToken = default);
+        Task<bool> Any(TKey id, CancellationToken cancellationToken = default);
         Task<IEnumerable<TEntity>> GetWithSpecification(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "",
+            bool asNoTracking = false,
+            bool asNoTrackingWithIdentityResolution = false,
+            int? Limit = null,
+            int Offset = 0,
             CancellationToken cancellationToken = default);
         Task<TEntity> Create(TEntity entity, bool autoSave = false);
         Task<ICollection<TEntity>> CreateRange(ICollection<TEntity> entity, bool autoSave = false);

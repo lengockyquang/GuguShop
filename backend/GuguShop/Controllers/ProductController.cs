@@ -1,5 +1,7 @@
 ﻿using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
+using GuguShop.Domain.Entities;
+using GuguShop.Infrastructure.Specification;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers
@@ -17,7 +19,11 @@ namespace GuguShop.Controllers
         [HttpGet("index")]
         public async Task<IActionResult> HandleIndexAction(CancellationToken cancellationToken = default)
         {
-            return Ok(await _productService.GetListAsync(cancellationToken));
+            var indexSpecification = new Specification<Product>(
+                null,
+                queryable => queryable.OrderBy(x => x.Name),
+                "Category, Manufacturer");
+            return Ok(await _productService.GetListAsync(cancellationToken, indexSpecification));
         }
         
         [HttpGet("show/{id:guid}")]
@@ -35,7 +41,7 @@ namespace GuguShop.Controllers
         [HttpPost("update/{id:guid}")]
         public async Task<IActionResult> HandleUpdateAction(Guid id, ProductUpdateDto updateDto)
         {
-            return Ok(await _productService.UpdateAsync(updateDto));
+            return Ok(await _productService.UpdateAsync(id, updateDto));
         }
 
         [HttpDelete("delete/{id:guid}")]

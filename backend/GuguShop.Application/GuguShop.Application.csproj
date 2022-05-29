@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\GuguShop.Domain\GuguShop.Domain.csproj" />
+      <ProjectReference Include="..\GuguShop.Infrastructure\GuguShop.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

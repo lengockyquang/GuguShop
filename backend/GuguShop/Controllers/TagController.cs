@@ -35,7 +35,7 @@ public class TagController: Controller
     [HttpPost("update/{id:guid}")]
     public async Task<IActionResult> HandleUpdateAction(Guid id, TagUpdateDto updateDto)
     {
-        return Ok(await _tagService.UpdateAsync(updateDto));
+        return Ok(await _tagService.UpdateAsync(id,updateDto));
     }
 
     [HttpDelete("delete/{id:guid}")]

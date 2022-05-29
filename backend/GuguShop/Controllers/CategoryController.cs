@@ -43,7 +43,7 @@ public class CategoryController: Controller
     [HttpPost("update/{id:guid}")]
     public async Task<IActionResult> HandleUpdateAction(Guid id, [FromBody]CategoryUpdateDto updateDto)
     {
-        return Ok(await _categoryService.UpdateAsync(updateDto));
+        return Ok(await _categoryService.UpdateAsync(id, updateDto));
     }
 
     [HttpDelete("delete/{id:guid}")]

@@ -9,9 +9,9 @@ namespace GuguShop.Application.Dto
         public string Name { get; set; }
         
         public Guid CategoryId { get; set; }
-        public CategoryDto Category { get; set; }
+        public CategoryListDto Category { get; set; }
         
         public Guid ManufacturerId { get; set; }
-        public ManufacturerDto Manufacturer { get; set; }
+        public ManufacturerListDto Manufacturer { get; set; }
     }
 }

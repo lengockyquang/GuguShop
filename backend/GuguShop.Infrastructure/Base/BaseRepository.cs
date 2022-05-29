@@ -31,10 +31,30 @@ namespace GuguShop.Infrastructure.Base
             return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(x=>x.Id.Equals(id), cancellationToken);
         }
 
-        public async Task<IEnumerable<TEntity>> GetWithSpecification(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "", CancellationToken cancellationToken = default)
+        public async Task<bool> Any(TKey id, CancellationToken cancellationToken = default)
+        {
+            return await _dbContext.Set<TEntity>().AnyAsync(x=>x.Id.Equals(id), cancellationToken);
+        }
+
+        public async Task<IEnumerable<TEntity>> GetWithSpecification(Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "",
+            bool asNoTracking = false,
+            bool asNoTrackingWithIdentityResolution = false,
+            int? Limit = null,
+            int Offset = 0,
+            CancellationToken cancellationToken = default)
         {
             var query = _dbContext.Set<TEntity>().AsQueryable();
+            if (asNoTracking)
+            {
+                query = query.AsNoTracking();
+            }
 
+            if (asNoTrackingWithIdentityResolution)
+            {
+                query = query.AsNoTrackingWithIdentityResolution();
+            }
+            
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -43,7 +63,17 @@ namespace GuguShop.Infrastructure.Base
             foreach (var includeProperty in includeProperties.Split
                 (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                query = query.Include(includeProperty);
+                query = query.Include(includeProperty.Trim());
+            }
+
+            if (Offset != 0)
+            {
+                query = query.Skip(Offset);
+            }
+
+            if(Limit.HasValue && Limit.Value != -1)
+            {
+                query = query.Take(Limit.Value);
             }
 
             if (orderBy != null)

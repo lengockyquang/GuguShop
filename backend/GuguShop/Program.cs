@@ -13,6 +13,7 @@ builder.Services.AddControllers()
     });
 
 builder.Services.SetupInfrastructure(builder.Configuration);
+builder.Services.SetupMiniProfiler();
 builder.Services.SetupApplication();
 builder.Services.SetupMongoGridFs(builder.Configuration);
 
@@ -31,9 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseMiniProfiler();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
