@@ -1,5 +1,6 @@
 ﻿using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
+using GuguShop.Application.Specifications;
 using GuguShop.Domain.Entities;
 using GuguShop.Infrastructure.Specification;
 using Microsoft.AspNetCore.Mvc;
@@ -19,10 +20,7 @@ namespace GuguShop.Controllers
         [HttpGet("index")]
         public async Task<IActionResult> HandleIndexAction(CancellationToken cancellationToken = default)
         {
-            var indexSpecification = new Specification<Product>(
-                null,
-                queryable => queryable.OrderBy(x => x.Name),
-                "Category, Manufacturer");
+            var indexSpecification = new GetProductListSpec();
             return Ok(await _productService.GetListAsync(cancellationToken, indexSpecification));
         }
         

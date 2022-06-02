@@ -22,11 +22,14 @@ namespace GuguShop.Application.Services
 
         public override async Task<ProductDto> CreateAsync(ProductCreateDto createDto)
         {
-            var tags = await _tagRepository.GetWithSpecification(x => createDto.TagIds.Contains(x.Id));
             var createEntity = _mapper.Map<ProductCreateDto, Product>(createDto);
             var product = await _productRepository.Create(createEntity, true);
-            product.Tags = tags.ToList();
-            await _productRepository.Update(product, true);
+            if (createDto.TagIds.Any())
+            {
+                var tags = await _tagRepository.GetWithSpecification(x => createDto.TagIds.Contains(x.Id));
+                product.Tags = tags.ToList();
+                await _productRepository.Update(product, true);
+            }
             return _mapper.Map<Product, ProductDto>(product);
         }
     }

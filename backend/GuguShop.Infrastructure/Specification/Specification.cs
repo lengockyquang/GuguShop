@@ -7,14 +7,18 @@ namespace GuguShop.Infrastructure.Specification;
 
 public class Specification<TEntity> where TEntity: Entity<Guid>
 {
-    public readonly Expression<Func<TEntity, bool>> Filter;
-    public readonly Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> Order;
-    public readonly string IncludeProperties;
+    public Expression<Func<TEntity, bool>> Filter { get; set; }
+    public Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> Order { get; set; }
+    public string IncludeProperties { get; set; }
     public readonly bool AsNoTracking = false;
     public readonly bool AsNoTrackingWithIdentityResolution = false;
     public int Limit { get; set; } = -1;
     public int Offset { get; set; } = 0;
 
+    public Specification()
+    {
+        
+    }
 
     public Specification(int limit, int offset)
     {
