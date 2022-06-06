@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using AutoMapper;
+using AutoMapper.EquivalencyExpression;
 using GuguShop.Application.Interfaces;
 using GuguShop.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,7 +29,11 @@ namespace GuguShop.Application.Extensions
         {
             serviceCollection.AddSingleton((sp) =>
             {
-                var configuration = new MapperConfiguration(cfg => cfg.AddMaps(assembly));
+                var configuration = new MapperConfiguration(cfg =>
+                {
+                    cfg.AddMaps(assembly);
+                    cfg.AddCollectionMappers();
+                });
                 return configuration.CreateMapper();
             });
 
