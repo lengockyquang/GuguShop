@@ -50,8 +50,8 @@ namespace GuguShop.Infrastructure.Base
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "",
             bool asNoTracking = false,
             bool asNoTrackingWithIdentityResolution = false,
-            int? Limit = null,
-            int Offset = 0,
+            int? limit = null,
+            int offset = 0,
             CancellationToken cancellationToken = default)
         {
             var query = _dbContext.Set<TEntity>().AsQueryable();
@@ -81,14 +81,14 @@ namespace GuguShop.Infrastructure.Base
             }
 
 
-            if (Offset != 0)
+            if (offset != 0)
             {
-                query = query.Skip(Offset);
+                query = query.Skip(offset);
             }
 
-            if (Limit.HasValue && Limit.Value != -1)
+            if (limit.HasValue && limit.Value != -1)
             {
-                query = query.Take(Limit.Value);
+                query = query.Take(limit.Value);
             }
 
             if (orderBy != null)
@@ -132,10 +132,16 @@ namespace GuguShop.Infrastructure.Base
 
         public async Task<TKey> Delete(TEntity entity, bool autoSave = false)
         {
-            await Task.CompletedTask;
             _dbContext.Set<TEntity>().Remove(entity);
             if (autoSave == true) await _dbContext.SaveChangesAsync();
             return entity.Id;
+        }
+
+        public async Task<ICollection<TKey>> DeleteRange(ICollection<TEntity> entities, bool autoSave = false)
+        {
+            _dbContext.Set<TEntity>().RemoveRange(entities);
+            if (autoSave == true) await _dbContext.SaveChangesAsync();
+            return entities.Select(x => x.Id).ToList();
         }
 
         public async Task SaveChangeAsync()
