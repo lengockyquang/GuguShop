@@ -70,7 +70,7 @@ namespace GuguShop.Application.Services
 
         public virtual async Task<TEntityDto> GetAsync(Guid id, CancellationToken cancellation = default)
         {
-            return _mapper.Map<TEntity, TEntityDto>(await _baseRepository.Get(id, cancellation));
+            return _mapper.Map<TEntity, TEntityDto>(await _baseRepository.Get(id, null,cancellation));
         }
     }
 }

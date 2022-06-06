@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using GuguShop.Application.Dto;
@@ -24,13 +25,27 @@ namespace GuguShop.Application.Services
         {
             var createEntity = _mapper.Map<ProductCreateDto, Product>(createDto);
             var product = await _productRepository.Create(createEntity, true);
-            if (createDto.TagIds.Any())
-            {
-                var tags = await _tagRepository.GetWithSpecification(x => createDto.TagIds.Contains(x.Id));
-                product.Tags = tags.ToList();
-                await _productRepository.Update(product, true);
-            }
+            if (createDto.TagIds.Count == 0) return _mapper.Map<Product, ProductDto>(product);
+            var tags = await _tagRepository.GetWithSpecification(x => createDto.TagIds.Contains(x.Id));
+            product.Tags = tags.ToList();
+            await _productRepository.Update(createEntity, true);
             return _mapper.Map<Product, ProductDto>(product);
+        }
+
+        public override async Task<ProductDto> UpdateAsync(Guid id, ProductUpdateDto updateDto)
+        {
+            
+            var updateEntity = await _productRepository.Get(id, "Tags");
+            if (updateEntity == null)
+            {
+                throw new Exception("Can not find entity with id " + id);
+            }
+            _mapper.Map(updateDto, updateEntity);
+            var updatedTags = await _tagRepository.GetWithSpecification(x => updateDto.TagIds.Contains(x.Id));
+            updateEntity.Tags = updatedTags.ToList();
+            var entity = await _productRepository.Update(updateEntity, true);
+            return _mapper.Map<Product, ProductDto>(entity);
+            
         }
     }
 }

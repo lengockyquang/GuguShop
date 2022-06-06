@@ -26,9 +26,19 @@ namespace GuguShop.Infrastructure.Base
             return isTracking ? _dbContext.Set<TEntity>().AsQueryable() : _dbContext.Set<TEntity>().AsNoTracking().AsQueryable();
         }
 
-        public async Task<TEntity> Get(TKey id, CancellationToken cancellationToken = default)
+        public async Task<TEntity> Get(TKey id,string includeProperties ,CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(x => x.Id.Equals(id), cancellationToken);
+            var query = _dbContext.Set<TEntity>().AsQueryable();
+            if (string.IsNullOrEmpty(includeProperties))
+            {
+                return await query.FirstOrDefaultAsync(x => x.Id.Equals(id), cancellationToken);
+            }
+            foreach (var includeProperty in includeProperties.Split
+                         (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty.Trim());
+            }
+            return await query.FirstOrDefaultAsync(x => x.Id.Equals(id), cancellationToken);
         }
 
         public async Task<bool> Any(TKey id, CancellationToken cancellationToken = default)
