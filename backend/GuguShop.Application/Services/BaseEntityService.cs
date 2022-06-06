@@ -54,7 +54,9 @@ namespace GuguShop.Application.Services
             return entity.Id;
         }
 
-        public virtual async ValueTask<IEnumerable<TEntityListDto>> GetListAsync(CancellationToken cancellation = default, Specification<TEntity> specification = null)
+        public virtual async ValueTask<IEnumerable<TEntityListDto>> GetListAsync(
+            Specification<TEntity> specification = null,
+            CancellationToken cancellation = default)
         {
             var entities = await _baseRepository.GetWithSpecification(
                 specification?.Filter, 

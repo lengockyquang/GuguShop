@@ -21,7 +21,7 @@ namespace GuguShop.Controllers
         public async Task<IActionResult> HandleIndexAction(CancellationToken cancellationToken = default)
         {
             var indexSpecification = new GetProductListSpec();
-            return Ok(await _productService.GetListAsync(cancellationToken, indexSpecification));
+            return Ok(await _productService.GetListAsync(indexSpecification, cancellationToken));
         }
         
         [HttpGet("show/{id:guid}")]

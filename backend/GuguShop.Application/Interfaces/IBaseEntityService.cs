@@ -13,7 +13,7 @@ namespace GuguShop.Application.Interfaces
         Task<TEntityDto> CreateAsync(TEntityCreateDto createDto);
         Task<TEntityDto> UpdateAsync(Guid id, TEntityUpdateDto updateDto);
         Task<Guid> RemoveAsync(Guid id);
-        ValueTask<IEnumerable<TEntityListDto>> GetListAsync(CancellationToken cancellation = default, Specification<TEntity> specification = null);
+        ValueTask<IEnumerable<TEntityListDto>> GetListAsync(Specification<TEntity> specification = null, CancellationToken cancellation = default);
         Task<TEntityDto> GetAsync(Guid id, CancellationToken cancellation = default);
     }
 }

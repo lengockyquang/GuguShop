@@ -21,7 +21,7 @@ public class CategoryController: Controller
     public async Task<IActionResult> HandleIndexAction(int limit, int offset, CancellationToken cancellationToken = default)
     {
         var specification = new Specification<Category>(limit, offset);
-        return Ok(await _categoryService.GetListAsync(cancellationToken, specification));
+        return Ok(await _categoryService.GetListAsync(specification, cancellationToken));
     }
         
     [HttpGet("show/{id:guid}")]

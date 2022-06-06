@@ -17,7 +17,7 @@ public class TagController: Controller
     [HttpGet("index")]
     public async Task<IActionResult> HandleIndexAction(CancellationToken cancellationToken = default)
     {
-        return Ok(await _tagService.GetListAsync(cancellationToken));
+        return Ok(await _tagService.GetListAsync(null, cancellationToken));
     }
         
     [HttpGet("show/{id:guid}")]
