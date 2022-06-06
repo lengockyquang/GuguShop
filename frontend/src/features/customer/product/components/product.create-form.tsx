@@ -1,7 +1,8 @@
-import { Button, Form, Input, notification } from 'antd'
+import { Button, Form, Input } from 'antd'
 import _ from 'lodash';
 import { ProductCreateDto } from '../../../../dtos/product.create-dto';
 import { createProduct } from '../../../../services/product.service';
+import { displayErrorNotify, displaySuccessNotify } from '../../../../utils/common';
 
 interface Props {
     onReload: () => void;
@@ -19,12 +20,10 @@ function ProductCreateForm(props: Props) {
         const statusCode = _.get(response, 'status');
         if(statusCode === 200){
             props.onReload();
+            displaySuccessNotify("Tạo mới thành công !");
         }
         else{
-            notification.error({
-                message:'Thông báo',
-                description:'Có lỗi xảy ra !'
-            })
+            displayErrorNotify();
         }
     }
 
