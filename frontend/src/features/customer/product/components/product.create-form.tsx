@@ -1,23 +1,24 @@
 import { Button, Form, Input, notification } from 'antd'
-import React from 'react'
-import axios from 'axios';
 import _ from 'lodash';
+import { ProductCreateDto } from '../../../../dtos/product.create-dto';
+import { createProduct } from '../../../../services/product.service';
 
-interface ProductCreateDto {
-    code: string;
-    name: string;
+interface Props {
+    onReload: () => void;
 }
 
-function ProductCreateForm() {
+function ProductCreateForm(props: Props) {
+    const onFinish = async (values: ProductCreateDto) => {
+        values.manufacturerId = '8FC79312-1A72-4B09-F6C2-08DA1721C052';
+        values.categoryId = '64857661-C03B-4B45-7DE6-08DA3B3B00EF';
+        values.tagIds = [
+            '9F912BE0-CA81-4B14-A6E4-08DA3B3A6739'
+        ];
 
-    const onFinish = (values: ProductCreateDto) => {
-        const response = axios.post('/api/product/create', values)
+        const response = await createProduct(values);
         const statusCode = _.get(response, 'status');
         if(statusCode === 200){
-            notification.success({
-                message:'Thông báo',
-                description: 'Tạo mới thành công !'
-            });
+            props.onReload();
         }
         else{
             notification.error({
