@@ -27,33 +27,6 @@ public class SampleController: Controller
         return Ok(cipher);
     }
 
-    [HttpGet("test-exception")]
-    public async Task<IActionResult> HandleTestException()
-    {
-        var allTasks = Task.WhenAll(new[]
-        {
-            GetExceptionAsync("Task 1"),
-            NormalTask("Task 2"),
-            GetExceptionAsync("Task 3"),
-        }); 
-        try
-        {
-            await allTasks;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Exception: "+ex.Message);
-            if (allTasks.Exception != null)
-            {
-                foreach (var childTaskException in allTasks.Exception.InnerExceptions)
-                {
-                    Console.WriteLine("Child exception: "+childTaskException.Message);
-                }    
-            }
-        }
-        return Ok();
-    }
-
     [HttpGet("get-rand-number")]
     public IActionResult HandleGetRandomInteger()
     {
@@ -66,16 +39,4 @@ public class SampleController: Controller
         return await Task.FromResult(new Random().Next());
     }
 
-    private static async Task NormalTask(string taskName)
-    {
-        await Task.Delay(5000);
-        Console.WriteLine(taskName+ " works!");
-    }
-
-    private static async Task GetExceptionAsync(string taskName)
-    {
-        await Task.Delay(5000);
-        throw new Exception("Exception is from " + taskName);
-    }
-    
 }

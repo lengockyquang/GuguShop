@@ -27,7 +27,7 @@ namespace GuguShop.Infrastructure.Base
             return isTracking ? _dbContext.Set<TEntity>().AsQueryable() : _dbContext.Set<TEntity>().AsNoTracking().AsQueryable();
         }
 
-        public async Task<TEntity> Get(TKey id,string includeProperties ,CancellationToken cancellationToken = default)
+        public async Task<TEntity> Get(TKey id,string includeProperties = "" ,CancellationToken cancellationToken = default)
         {
             var query = _dbContext.Set<TEntity>().AsQueryable();
             if (string.IsNullOrEmpty(includeProperties))
@@ -96,14 +96,14 @@ namespace GuguShop.Infrastructure.Base
         public virtual async Task<TEntity> Create(TEntity entity, bool autoSave = false)
         {
             await _dbContext.Set<TEntity>().AddAsync(entity);
-            if (autoSave == true) await _dbContext.SaveChangesAsync();
+            if (autoSave) await _dbContext.SaveChangesAsync();
             return entity;
         }
 
         public virtual async Task<ICollection<TEntity>> CreateRange(ICollection<TEntity> entities, bool autoSave = false)
         {
             await _dbContext.Set<TEntity>().AddRangeAsync(entities);
-            if (autoSave == true)
+            if (autoSave)
             {
                 await _dbContext.SaveChangesAsync();
             }
@@ -113,28 +113,28 @@ namespace GuguShop.Infrastructure.Base
         public virtual async Task<TEntity> Update(TEntity entity, bool autoSave = false)
         {
             _dbContext.Set<TEntity>().Update(entity);
-            if (autoSave == true) await _dbContext.SaveChangesAsync();
+            if (autoSave) await _dbContext.SaveChangesAsync();
             return entity;
         }
 
         public virtual async Task<ICollection<TEntity>> UpdateRange(ICollection<TEntity> entities, bool autoSave = false)
         {
             _dbContext.Set<TEntity>().UpdateRange(entities);
-            if (autoSave == true) await _dbContext.SaveChangesAsync();
+            if (autoSave) await _dbContext.SaveChangesAsync();
             return entities;
         }
 
         public virtual async Task<TKey> Delete(TEntity entity, bool autoSave = false)
         {
             _dbContext.Set<TEntity>().Remove(entity);
-            if (autoSave == true) await _dbContext.SaveChangesAsync();
+            if (autoSave) await _dbContext.SaveChangesAsync();
             return entity.Id;
         }
 
         public virtual async Task<ICollection<TKey>> DeleteRange(ICollection<TEntity> entities, bool autoSave = false)
         {
             _dbContext.Set<TEntity>().RemoveRange(entities);
-            if (autoSave == true) await _dbContext.SaveChangesAsync();
+            if (autoSave) await _dbContext.SaveChangesAsync();
             return entities.Select(x => x.Id).ToList();
         }
 

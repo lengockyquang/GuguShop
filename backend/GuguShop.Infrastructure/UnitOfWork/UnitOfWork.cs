@@ -12,13 +12,11 @@ namespace GuguShop.Infrastructure.UnitOfWork;
 public class UnitOfWork: IUnitOfWork
 {
     private readonly GuguDbContext _context;
-    private IServiceProvider _services;
     private IDbContextTransaction _currentTransaction;
 
-    public UnitOfWork(GuguDbContext context, IServiceProvider services)
+    public UnitOfWork(GuguDbContext context)
     {
         _context = context;
-        _services = services;
     }
 
     public virtual async Task<IDisposable> BeginTransactionAsync(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)

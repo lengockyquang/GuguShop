@@ -57,9 +57,9 @@ public class CryptoService: ICryptoService
             return Convert.ToBase64String(cipherTextBytes);
         }
 
-        public string Decrypt(string encryptText, string passPhrase)
+        public string Decrypt(string cipherText, string passPhrase)
         {
-            if (string.IsNullOrEmpty(encryptText.Trim()))
+            if (string.IsNullOrEmpty(cipherText.Trim()))
             {
                 throw new InvalidDataException("Encrypt text is null or empty!");
             }
@@ -69,7 +69,7 @@ public class CryptoService: ICryptoService
             }
             // Get the complete stream of bytes that represent:
             // [16 bytes of Salt] + [16 bytes of IV] + [n bytes of CipherText]
-            var cipherTextBytesWithSaltAndIv = Convert.FromBase64String(encryptText);
+            var cipherTextBytesWithSaltAndIv = Convert.FromBase64String(cipherText);
             // Get the saltbytes by extracting the first 16 bytes from the supplied cipherText bytes.
             var saltStringBytes = cipherTextBytesWithSaltAndIv.Take(Keysize / 8).ToArray();
             // Get the IV bytes by extracting the next 16 bytes from the supplied cipherText bytes.

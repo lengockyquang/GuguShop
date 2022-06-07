@@ -23,9 +23,9 @@ namespace GuguShop.Domain.Base.Repositories
             int offset = 0,
             CancellationToken cancellationToken = default);
         Task<TEntity> Create(TEntity entity, bool autoSave = false);
-        Task<ICollection<TEntity>> CreateRange(ICollection<TEntity> entity, bool autoSave = false);
+        Task<ICollection<TEntity>> CreateRange(ICollection<TEntity> entities, bool autoSave = false);
         Task<TEntity> Update(TEntity entity, bool autoSave = false);
-        Task<ICollection<TEntity>> UpdateRange(ICollection<TEntity> entity, bool autoSave = false);
+        Task<ICollection<TEntity>> UpdateRange(ICollection<TEntity> entities, bool autoSave = false);
         Task<TKey> Delete(TEntity entity, bool autoSave = false);
         Task<ICollection<TKey>> DeleteRange(ICollection<TEntity> entities, bool autoSave = false);
 

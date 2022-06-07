@@ -11,7 +11,7 @@ public class Specification<TEntity> where TEntity: Entity<Guid>
     public Expression<Func<TEntity, bool>> Filter { get; set; }
     public Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> Order { get; set; }
     public string IncludeProperties { get; set; }
-    public EfTrackingType EfTrackingType = EfTrackingType.DefaultTracking;
+    public EfTrackingType EfTrackingType { get; set; }
     public int Limit { get; set; } = -1;
     public int Offset { get; set; } = 0;
 
