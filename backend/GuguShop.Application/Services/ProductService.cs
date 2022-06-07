@@ -6,6 +6,7 @@ using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
 using GuguShop.Domain.Entities;
 using GuguShop.Domain.Repositories;
+using GuguShop.Infrastructure.Exceptions;
 
 namespace GuguShop.Application.Services
 {
@@ -38,14 +39,13 @@ namespace GuguShop.Application.Services
             var updateEntity = await _productRepository.Get(id, "Tags");
             if (updateEntity == null)
             {
-                throw new Exception("Can not find entity with id " + id);
+                throw new NotFoundException("Can not find entity with id " + id);
             }
             _mapper.Map(updateDto, updateEntity);
             var updatedTags = await _tagRepository.GetWithSpecification(x => updateDto.TagIds.Contains(x.Id));
             updateEntity.Tags = updatedTags.ToList();
             var entity = await _productRepository.Update(updateEntity, true);
             return _mapper.Map<Product, ProductDto>(entity);
-            
         }
     }
 }

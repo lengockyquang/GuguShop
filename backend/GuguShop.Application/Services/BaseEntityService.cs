@@ -6,6 +6,7 @@ using AutoMapper;
 using GuguShop.Application.Interfaces;
 using GuguShop.Domain.Base.Entities;
 using GuguShop.Domain.Base.Repositories;
+using GuguShop.Infrastructure.Exceptions;
 using GuguShop.Infrastructure.Specification;
 
 namespace GuguShop.Application.Services
@@ -35,7 +36,7 @@ namespace GuguShop.Application.Services
             var isEntityExist = await _baseRepository.Any(id);
             if (!isEntityExist)
             {
-                throw new Exception("Can not find entity with id " + id);
+                throw new NotFoundException("Can not find entity with id " + id);
             }
             var updateEntity = _mapper.Map<TEntityUpdateDto, TEntity>(updateDto);
             var entity = await _baseRepository.Update(updateEntity, true);
@@ -47,7 +48,7 @@ namespace GuguShop.Application.Services
             var entity = await _baseRepository.Get(id);
             if (entity == null)
             {
-                throw new Exception("Can not find entity with id " + id);
+                throw new NotFoundException("Can not find entity with id " + id);
             }
 
             await _baseRepository.Delete(entity, true);
