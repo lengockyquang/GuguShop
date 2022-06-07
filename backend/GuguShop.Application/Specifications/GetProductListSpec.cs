@@ -3,10 +3,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using GuguShop.Domain.Entities;
 using GuguShop.Infrastructure.Specification;
+using GuguShop.Infrastructure.Utility;
 
 namespace GuguShop.Application.Specifications;
 
-public class GetProductListSpec: Specification<Product>
+public class GetProductListSpec : Specification<Product>
 {
     public GetProductListSpec()
     {
@@ -14,20 +15,18 @@ public class GetProductListSpec: Specification<Product>
         Order = queryable => queryable.OrderBy(x => x.Name);
         IncludeProperties = "Category, Manufacturer";
     }
-    
+
     public GetProductListSpec(int limit, int offset) : base(limit, offset)
     {
     }
 
     public GetProductListSpec(Expression<Func<Product, bool>> filter,
         Func<IQueryable<Product>, IOrderedQueryable<Product>> order,
-        string includeProperties,
-        bool asNoTracking = false,
-        bool asNoTrackingWithIdentityResolution = false) : base(filter,
+        string includeProperties) : base(filter,
         order,
         includeProperties,
-        asNoTracking,
-        asNoTrackingWithIdentityResolution)
+        EfTrackingType.DefaultTracking
+    )
     {
     }
 }

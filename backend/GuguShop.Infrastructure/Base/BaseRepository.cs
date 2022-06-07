@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GuguShop.Domain.Base.Entities;
 using GuguShop.Domain.Base.Repositories;
+using GuguShop.Infrastructure.Utility;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuguShop.Infrastructure.Base
@@ -48,19 +49,18 @@ namespace GuguShop.Infrastructure.Base
 
         public async Task<IEnumerable<TEntity>> GetWithSpecification(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "",
-            bool asNoTracking = false,
-            bool asNoTrackingWithIdentityResolution = false,
+            EfTrackingType efTrackingType = EfTrackingType.DefaultTracking,
             int? limit = null,
             int offset = 0,
             CancellationToken cancellationToken = default)
         {
             var query = _dbContext.Set<TEntity>().AsQueryable();
-            if (asNoTracking)
+            
+            if (efTrackingType == EfTrackingType.AsNoTracking)
             {
                 query = query.AsNoTracking();
             }
-
-            if (asNoTrackingWithIdentityResolution)
+            else if (efTrackingType == EfTrackingType.AsNoTrackingWithIdentityResolution)
             {
                 query = query.AsNoTrackingWithIdentityResolution();
             }

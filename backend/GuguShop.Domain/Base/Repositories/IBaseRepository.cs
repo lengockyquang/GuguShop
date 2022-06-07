@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using GuguShop.Infrastructure.Utility;
 
 namespace GuguShop.Domain.Base.Repositories
 {
@@ -17,8 +18,7 @@ namespace GuguShop.Domain.Base.Repositories
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "",
-            bool asNoTracking = false,
-            bool asNoTrackingWithIdentityResolution = false,
+            EfTrackingType efTrackingType = EfTrackingType.DefaultTracking,
             int? limit = null,
             int offset = 0,
             CancellationToken cancellationToken = default);

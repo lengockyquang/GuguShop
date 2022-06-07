@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using GuguShop.Domain.Base.Entities;
+using GuguShop.Infrastructure.Utility;
 
 namespace GuguShop.Infrastructure.Specification;
 
@@ -10,8 +11,7 @@ public class Specification<TEntity> where TEntity: Entity<Guid>
     public Expression<Func<TEntity, bool>> Filter { get; set; }
     public Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> Order { get; set; }
     public string IncludeProperties { get; set; }
-    public readonly bool AsNoTracking = false;
-    public readonly bool AsNoTrackingWithIdentityResolution = false;
+    public EfTrackingType EfTrackingType = EfTrackingType.DefaultTracking;
     public int Limit { get; set; } = -1;
     public int Offset { get; set; } = 0;
 
@@ -27,13 +27,11 @@ public class Specification<TEntity> where TEntity: Entity<Guid>
     }
     
     public Specification(Expression<Func<TEntity, bool>> filter,
-        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order, string includeProperties, bool asNoTracking = false,
-        bool asNoTrackingWithIdentityResolution = false)
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> order, string includeProperties, EfTrackingType efTrackingType)
     {
         Filter = filter;
         Order = order;
         IncludeProperties = includeProperties;
-        AsNoTracking = asNoTracking;
-        AsNoTrackingWithIdentityResolution = asNoTrackingWithIdentityResolution;
+        EfTrackingType = efTrackingType;
     }
 }

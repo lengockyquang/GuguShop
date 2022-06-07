@@ -8,6 +8,7 @@ using GuguShop.Domain.Base.Entities;
 using GuguShop.Domain.Base.Repositories;
 using GuguShop.Infrastructure.Exceptions;
 using GuguShop.Infrastructure.Specification;
+using GuguShop.Infrastructure.Utility;
 
 namespace GuguShop.Application.Services
 {
@@ -63,8 +64,7 @@ namespace GuguShop.Application.Services
                 specification?.Filter, 
                 specification?.Order,
                 specification?.IncludeProperties, 
-                specification?.AsNoTracking ?? false,
-                specification?.AsNoTrackingWithIdentityResolution ?? false, 
+                specification?.EfTrackingType ?? EfTrackingType.DefaultTracking,
                 specification?.Limit,
                 specification?.Offset ?? 0,
                 cancellation);
