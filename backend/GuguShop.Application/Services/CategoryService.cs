@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using GuguShop.Application.Dto;
@@ -21,6 +23,15 @@ namespace GuguShop.Application.Services
             _logger = logger;
         }
 
+        public async Task<ICollection<CategoryComboDto>> GetComboDataAsync(CancellationToken cancellationToken = default)
+        {
+            var data = await _categoryRepository.GetCategoryCombo(cancellationToken);
+            return data.Select(x => new CategoryComboDto()
+            {
+                Label = x.Name,
+                Value = x.Id.ToString(),
+            }).ToList();
+        }
         public async Task InsertSampleData(int maxItem)
         {
             var categories = new List<Category>();

@@ -23,7 +23,14 @@ public class CategoryController: Controller
         var specification = new Specification<Category>(limit, offset);
         return Ok(await _categoryService.GetListAsync(specification, cancellationToken));
     }
-        
+
+    [HttpGet("index-combo")]
+    public async Task<IActionResult> HandleGetComboData(CancellationToken cancellationToken = default)
+    {
+        return Ok(await _categoryService.GetComboDataAsync(cancellationToken));
+    }
+
+
     [HttpGet("show/{id:guid}")]
     public async Task<IActionResult> HandleShowAction(Guid id, CancellationToken cancellationToken = default)
     {

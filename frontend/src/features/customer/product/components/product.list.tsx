@@ -1,56 +1,75 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import _ from 'lodash';
 import { Product } from '../../../../domain/product';
 import ProductCreateForm from './product.create-form';
-import { notification } from 'antd';
+import { Button, notification } from 'antd';
 import { loadProduct } from '../../../../services/product.service';
+import ApplicationModal, { ApplicationModalRef } from '../../../../components/ApplicationModal';
 
 function ProductList() {
 
     const [products, setProducts] = useState<Array<Product>>([]);
-
-    useEffect(()=>{
+    const createProductModalRef = useRef<ApplicationModalRef>(null);
+    useEffect(() => {
         loadProductList();
-    },[]);
+    }, []);
 
-    const loadProductList = async () =>{
+    const loadProductList = async () => {
         const response = await loadProduct();
         const statusCode = _.get(response, 'status');
-        if(statusCode === 200){
+        if (statusCode === 200) {
             const data = _.get(response, 'data', []);
             setProducts(data);
         }
-        else{
+        else {
             notification.error({
-                message:'Thông báo',
-                description:'Có lỗi xảy ra !'
+                message: 'Thông báo',
+                description: 'Có lỗi xảy ra !'
             })
         }
     };
 
-    const renderProductItem = (product: Product, index: number) =>{
+    const openCreateForm = () =>{
+        createProductModalRef.current?.onOpen();
+    }
+
+    const renderProductItem = (product: Product, index: number) => {
         return (
             <div key={index}>
-                Name: {product.name} <br/>
-                Category: {product.category.name} <br/>
-                Manufacturer: {product.manufacturer.name} <br/>
-                <hr/>
+                Name: {product.name} <br />
+                Category: {product.category.name} <br />
+                Manufacturer: {product.manufacturer.name} <br />
+                <hr />
             </div>
         )
     }
 
     const renderProductList = () => {
-        return _.map(products, (productItem: Product, index: number)=>{
+        return _.map(products, (productItem: Product, index: number) => {
             return renderProductItem(productItem, index);
         });
     }
 
-    return (
-        <div style={{padding: 10}}>
-            <ProductCreateForm
-                onReload={loadProductList}
+    const renderCreateProductModal = () =>{
+        return (
+            <ApplicationModal
+                ref={createProductModalRef}
+                title='Tạo mới'
+                content={<ProductCreateForm
+                    onReload={loadProductList}
+                />}
+                maskClosable={false}
             />
+        )
+    }
+
+    return (
+        <div style={{ padding: 10 }}>
+            <Button type="primary" onClick={openCreateForm}>
+                Tạo mới
+            </Button>
             {renderProductList()}
+            {renderCreateProductModal()}
         </div>
     )
 }

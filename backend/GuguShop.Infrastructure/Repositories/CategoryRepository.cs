@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using GuguShop.Domain.Entities;
 using GuguShop.Domain.Repositories;
 using GuguShop.Infrastructure.Base;
 using GuguShop.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GuguShop.Infrastructure.Repositories
 {
@@ -20,6 +22,13 @@ namespace GuguShop.Infrastructure.Repositories
         {
             await _dbContext.Set<Category>().BulkInsertAsync(entities);
             return entities;        
+        }
+
+        public async Task<ICollection<Category>> GetCategoryCombo(CancellationToken cancellationToken1 = default)
+        {
+            return await _dbContext.Set<Category>()
+                .AsNoTracking()
+                .ToListAsync(cancellationToken1);
         }
     }
 }
