@@ -1,12 +1,14 @@
 ﻿using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
 using GuguShop.Application.Specifications;
+using GuguShop.Attributes;
 using GuguShop.Domain.Entities;
 using GuguShop.Infrastructure.Specification;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("/api/product")]
     public class ProductController : Controller

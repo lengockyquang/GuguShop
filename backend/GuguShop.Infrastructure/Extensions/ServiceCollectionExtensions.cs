@@ -29,6 +29,7 @@ namespace GuguShop.Infrastructure.Extensions
             serviceCollection.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
             serviceCollection.AddScoped<ICryptoService, CryptoService>();
+            serviceCollection.AddScoped<ICustomJwtGenerator, CustomJwtGenerator>();
             return serviceCollection;
         }
 

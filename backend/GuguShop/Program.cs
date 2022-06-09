@@ -1,6 +1,7 @@
 using GuguShop.Application.Extensions;
 using GuguShop.GridFsApplication.Extensions;
 using GuguShop.Infrastructure.Extensions;
+using GuguShop.Middlewares;
 using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiniProfiler();
+app.UseMiddleware<CustomJwtMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 
