@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GuguShop.Controllers;
 
 [ApiController]
-[Route("/api/tag")]
+[Route("/api/tags")]
 public class TagController: Controller
 {
     private readonly ITagService _tagService;
@@ -14,31 +14,31 @@ public class TagController: Controller
         _tagService = tagService;
     }
     
-    [HttpGet("index")]
+    [HttpGet]
     public async Task<IActionResult> HandleIndexAction(CancellationToken cancellationToken = default)
     {
         return Ok(await _tagService.GetListAsync(null, cancellationToken));
     }
         
-    [HttpGet("show/{id:guid}")]
+    [HttpGet("{id:guid}")]
     public async Task<IActionResult> HandleShowAction(Guid id, CancellationToken cancellationToken = default)
     {
         return Ok(await _tagService.GetAsync(id, cancellationToken));
     }
 
-    [HttpPost("create")]
+    [HttpPost]
     public async Task<IActionResult> HandleCreateAction([FromBody] TagCreateDto createDto)
     {
         return Ok(await _tagService.CreateAsync(createDto));
     }
         
-    [HttpPost("update/{id:guid}")]
+    [HttpPut("{id:guid}")]
     public async Task<IActionResult> HandleUpdateAction(Guid id, TagUpdateDto updateDto)
     {
         return Ok(await _tagService.UpdateAsync(id,updateDto));
     }
 
-    [HttpDelete("delete/{id:guid}")]
+    [HttpDelete("{id:guid}")]
     public async Task<IActionResult> HandleDeleteAction(Guid id)
     {
         return Ok(await _tagService.RemoveAsync(id));

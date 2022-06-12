@@ -10,7 +10,7 @@ namespace GuguShop.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("/api/product")]
+    [Route("/api/products")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -19,32 +19,32 @@ namespace GuguShop.Controllers
             _productService = productService;
         }
         
-        [HttpGet("index")]
+        [HttpGet]
         public async Task<IActionResult> HandleIndexAction(CancellationToken cancellationToken = default)
         {
             var indexSpecification = new GetProductListSpec();
             return Ok(await _productService.GetListAsync(indexSpecification, cancellationToken));
         }
         
-        [HttpGet("show/{id:guid}")]
+        [HttpGet("{id:guid}")]
         public async Task<IActionResult> HandleShowAction(Guid id, CancellationToken cancellationToken = default)
         {
             return Ok(await _productService.GetAsync(id, cancellationToken));
         }
 
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> HandleCreateAction([FromBody] ProductCreateDto createDto)
         {
             return Ok(await _productService.CreateAsync(createDto));
         }
         
-        [HttpPost("update/{id:guid}")]
+        [HttpPut("{id:guid}")]
         public async Task<IActionResult> HandleUpdateAction(Guid id, ProductUpdateDto updateDto)
         {
             return Ok(await _productService.UpdateAsync(id, updateDto));
         }
 
-        [HttpDelete("delete/{id:guid}")]
+        [HttpDelete("{id:guid}")]
         public async Task<IActionResult> HandleDeleteAction(Guid id)
         {
             return Ok(await _productService.RemoveAsync(id));

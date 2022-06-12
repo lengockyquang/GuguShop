@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GuguShop.Controllers
 {
     [ApiController]
-    [Route("/api/manufacturer")]
+    [Route("/api/manufacturers")]
     public class ManufacturerController: Controller
     {
         private readonly IManufacturerService _manufacturerService;
@@ -16,31 +16,31 @@ namespace GuguShop.Controllers
             _manufacturerService = manufacturerService;
         }
         
-        [HttpGet("index")]
+        [HttpGet]
         public async Task<IActionResult> HandleIndexAction(CancellationToken cancellationToken = default)
         {
             return Ok(await _manufacturerService.GetListAsync(null, cancellationToken));
         }
         
-        [HttpGet("show/{id:guid}")]
+        [HttpGet("{id:guid}")]
         public async Task<IActionResult> HandleShowAction(Guid id, CancellationToken cancellationToken = default)
         {
             return Ok(await _manufacturerService.GetAsync(id, cancellationToken));
         }
 
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> HandleCreateAction([FromBody]ManufacturerCreateDto createDto)
         {
             return Ok(await _manufacturerService.CreateAsync(createDto));
         }
         
-        [HttpPost("update/{id:guid}")]
+        [HttpPut("{id:guid}")]
         public async Task<IActionResult> HandleUpdateAction(Guid id, [FromBody]ManufacturerUpdateDto updateDto)
         {
             return Ok(await _manufacturerService.UpdateAsync(id,updateDto));
         }
 
-        [HttpDelete("delete/{id:guid}")]
+        [HttpDelete("{id:guid}")]
         public async Task<IActionResult> HandleDeleteAction(Guid id)
         {
             return Ok(await _manufacturerService.RemoveAsync(id));
