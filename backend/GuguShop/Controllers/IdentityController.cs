@@ -1,29 +1,58 @@
 ﻿using GuguShop.Application.Dto;
+using GuguShop.Domain.Ums;
 using GuguShop.Infrastructure.Utility;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers;
 
+[AllowAnonymous]
 [Route("/api/identity")]
 public class IdentityController : Controller
 {
-    private readonly ICustomJwtGenerator _customJwtGenerator;
-    public IdentityController(ICustomJwtGenerator customJwtGenerator)
+    private readonly SignInManager<User> _signInManager;
+    private readonly UserManager<User> _userManager;
+    private readonly ILogger<IdentityController> _logger;
+    private readonly IAuthUser _authUser;
+    public IdentityController(UserManager<User> userManager, SignInManager<User> signInManager, ILogger<IdentityController> logger, IAuthUser authUser)
     {
-        _customJwtGenerator = customJwtGenerator;
+        _userManager = userManager;
+        _signInManager = signInManager;
+        _logger = logger;
+        _authUser = authUser;
     }
     
     [HttpPost("login")]
-    public IActionResult HandleLoginAction(LoginForm loginForm)
+    public async Task<IActionResult> HandleLoginAction(LoginForm loginForm)
     {
-        var token = _customJwtGenerator.GenerateToken(loginForm.UserName);
-        return Ok(token);
+        var result = await _signInManager.PasswordSignInAsync(
+            loginForm.UserName,
+            loginForm.Password,
+            loginForm.RememberMe,
+            false);
+        if (result.Succeeded)
+        {
+            return Ok();
+        }
+        return BadRequest("Username or password is incorrect");
     }
 
     [HttpGet("check-login")]
-    public IActionResult HandleCheckLoginAction(string token)
+    public IActionResult HandleCheckLoginAction()
     {
-        var isValid = _customJwtGenerator.ValidateCurrentToken(token);
-        return isValid ? Ok("Success") : Unauthorized();
+        return Ok(_authUser.IsAuthenticated);
+    }
+    
+    [HttpPost("register")]
+    public async Task<IActionResult> HandleRegisterAction(RegisterForm registerForm)
+    {
+        var user = new User() { UserName = registerForm.UserName, Email = registerForm.Email };
+        var result = await _userManager.CreateAsync(user, registerForm.Password);
+        if (result.Succeeded)
+        {
+            return Ok();
+        }
+        return Ok(result.Errors);
     }
 }

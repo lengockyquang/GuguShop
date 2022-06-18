@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("/api/products")]
     public class ProductController : Controller

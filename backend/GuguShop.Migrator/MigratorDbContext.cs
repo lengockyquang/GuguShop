@@ -14,6 +14,7 @@ namespace GuguShop.Migrator
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ConfigureEntities();
+            modelBuilder.ConfigureUmsEntities();
         }
     }
 }

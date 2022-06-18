@@ -14,6 +14,7 @@ builder.Services.AddControllers()
     });
 
 builder.Services.SetupInfrastructure(builder.Configuration);
+builder.Services.SetupAuthentication();
 builder.Services.SetupMiniProfiler();
 builder.Services.SetupApplication();
 builder.Services.SetupMongoGridFs(builder.Configuration);
@@ -33,7 +34,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiniProfiler();
-app.UseMiddleware<CustomJwtMiddleware>();
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
