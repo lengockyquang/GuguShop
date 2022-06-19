@@ -3,7 +3,7 @@ using GuguShop.GridFsApplication.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GuguShop.Controllers;
+namespace GuguShop.Controllers.Common;
 
 [Authorize]
 [ApiController]
@@ -15,7 +15,7 @@ public class FileController : Controller
     {
         _baseMongoClient = baseMongoClient;
     }
-    
+
     [HttpPost("upload-mongo")]
     [RequestSizeLimit(CommonConstants.RequestSizeLimit)]
     public async Task<ActionResult> HandleUploadAction(IFormFile file, CancellationToken cancellationToken = default)

@@ -3,7 +3,7 @@ using GuguShop.Infrastructure.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GuguShop.Controllers;
+namespace GuguShop.Controllers.Business;
 
 [Authorize]
 [Route("api/sample")]

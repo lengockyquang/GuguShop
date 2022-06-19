@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GuguShop.Controllers;
+namespace GuguShop.Controllers.Ums;
 
 [AllowAnonymous]
 [Route("/api/identity")]
@@ -22,7 +22,7 @@ public class IdentityController : Controller
         _logger = logger;
         _authUser = authUser;
     }
-    
+
     [HttpPost("login")]
     public async Task<IActionResult> HandleLoginAction(LoginForm loginForm)
     {
@@ -50,7 +50,7 @@ public class IdentityController : Controller
         await _signInManager.SignOutAsync();
         return Ok();
     }
-    
+
     [HttpPost("register")]
     public async Task<IActionResult> HandleRegisterAction(RegisterForm registerForm)
     {

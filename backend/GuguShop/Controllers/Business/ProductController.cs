@@ -4,7 +4,7 @@ using GuguShop.Application.Specifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GuguShop.Controllers
+namespace GuguShop.Controllers.Business
 {
     [Authorize]
     [ApiController]

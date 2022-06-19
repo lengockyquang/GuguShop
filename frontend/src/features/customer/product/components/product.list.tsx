@@ -7,7 +7,6 @@ import { loadProduct } from '../../../../services/product.service';
 import ApplicationModal, { ApplicationModalRef } from '../../../../components/ApplicationModal';
 
 function ProductList() {
-
     const [products, setProducts] = useState<Array<Product>>([]);
     const createProductModalRef = useRef<ApplicationModalRef>(null);
     useEffect(() => {
