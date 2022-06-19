@@ -16,7 +16,8 @@ public static class SetupAuthenticationExtensions
         serviceCollection.AddHttpContextAccessor();
         serviceCollection.AddAuthentication();
         serviceCollection.AddScoped<IAuthUser, AuthUser>();
-        serviceCollection.AddIdentity<User, Role>()
+        serviceCollection
+            .AddIdentity<User, Role>()
             .AddEntityFrameworkStores<GuguDbContext>();
         var expiredTime = TimeSpan.FromDays(1);
 
@@ -47,7 +48,7 @@ public static class SetupAuthenticationExtensions
             options.Cookie.HttpOnly = true;
             options.ExpireTimeSpan = expiredTime;
 
-            options.LoginPath = "/api/login";
+            options.LoginPath = "/api/identity/login";
             options.SlidingExpiration = true;
             options.Events = new CookieAuthenticationEvents
             {

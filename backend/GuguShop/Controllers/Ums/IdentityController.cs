@@ -24,7 +24,7 @@ public class IdentityController : Controller
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> HandleLoginAction(LoginForm loginForm)
+    public async Task<IActionResult> HandleLoginAction([FromBody] LoginForm loginForm)
     {
         var result = await _signInManager.PasswordSignInAsync(
             loginForm.UserName,

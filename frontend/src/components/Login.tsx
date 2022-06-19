@@ -2,16 +2,29 @@ import { Button, Form, Input } from 'antd'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import React from 'react'
 import { LoginForm } from '../domain/ums/login-form';
+import { login } from '../services/identity.service';
+import { displayErrorNotify, displaySuccessNotify } from '../utils/common';
+import {useDispatch} from 'react-redux';
+import { loginEvent } from '../redux/identitySlice';
 
 interface Props {
     callback?: () => void;
 }
 
 function Login(props: Props) {
+    const dispatch = useDispatch();
     const [form] = Form.useForm();
 
     const onFinish = async (values: LoginForm) => {
         console.log(values);
+        const loginResponse = await login(values);
+        if(loginResponse.status === 200){
+            displaySuccessNotify();
+            dispatch(loginEvent("test-username"));
+        }
+        else{
+            displayErrorNotify();
+        }
         props.callback?.();
     }
 
