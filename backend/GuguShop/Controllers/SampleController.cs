@@ -1,9 +1,11 @@
 ﻿using GuguShop.Infrastructure.Exceptions;
 using GuguShop.Infrastructure.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers;
 
+[Authorize]
 [Route("api/sample")]
 public class SampleController: Controller
 {

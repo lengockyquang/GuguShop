@@ -2,10 +2,12 @@
 using System.Threading.Tasks;
 using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("/api/manufacturers")]
     public class ManufacturerController: Controller

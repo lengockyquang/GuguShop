@@ -3,12 +3,14 @@ using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
 using GuguShop.Domain.Entities;
 using GuguShop.Infrastructure.Specification;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers;
 
-[Route("api/categories")]
+[Authorize]
 [ApiController]
+[Route("api/categories")]
 public class CategoryController: Controller
 {
     private readonly ICategoryService _categoryService;

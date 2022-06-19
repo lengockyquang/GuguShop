@@ -1,9 +1,11 @@
 ﻿using GuguShop.Constants;
 using GuguShop.GridFsApplication.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/file")]
 public class FileController : Controller

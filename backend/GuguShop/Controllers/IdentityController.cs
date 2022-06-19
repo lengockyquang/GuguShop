@@ -43,6 +43,13 @@ public class IdentityController : Controller
     {
         return Ok(_authUser.IsAuthenticated);
     }
+
+    [HttpGet("logout")]
+    public async Task<IActionResult> HandleLogoutAction()
+    {
+        await _signInManager.SignOutAsync();
+        return Ok();
+    }
     
     [HttpPost("register")]
     public async Task<IActionResult> HandleRegisterAction(RegisterForm registerForm)
