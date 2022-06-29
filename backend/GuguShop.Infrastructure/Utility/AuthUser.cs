@@ -14,5 +14,6 @@ public class AuthUser: IAuthUser
     }
 
     public bool IsAuthenticated => _principalAccessor.Identity is { IsAuthenticated: true };
+    public string UserName => _principalAccessor.Identity.Name;
     public ClaimsPrincipal ClaimsPrincipal => _principalAccessor;
 }

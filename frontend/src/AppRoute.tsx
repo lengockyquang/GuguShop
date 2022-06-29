@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import AuthToolbar from './components/AuthToolbar';
+import Login from './components/Login';
 import NotFound from './components/NotFound';
 import CustomerProductRoute from './features/customer/product';
 
 function AppRoute() {
     return (
         <React.Fragment>
-            <AuthToolbar/>
             <Routes>
                 <Route path={'/'} element={<Navigate to={"/home"} />} />
+                <Route path='/login' element={<Login />} />
                 <Route path={"/home"}>
                     {CustomerProductRoute()}
                 </Route>

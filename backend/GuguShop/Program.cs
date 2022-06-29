@@ -5,24 +5,25 @@ using GuguShop.Middlewares;
 using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
-// Add services to the container.
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>
     {
         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
     });
 
-builder.Services.SetupInfrastructure(builder.Configuration);
+builder.Services.SetupInfrastructure(configuration);
 builder.Services.SetupAuthentication();
 builder.Services.SetupMiniProfiler();
 builder.Services.SetupApplication();
-builder.Services.SetupMongoGridFs(builder.Configuration);
+builder.Services.SetupMongoGridFs(configuration);
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Host.SetupSerilogHostBuilder();
 
 var app = builder.Build();
 
@@ -31,8 +32,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
+app.UseLoggingMiddleware();
 app.UseMiniProfiler();
 app.UseRouting();
 app.UseAuthentication();

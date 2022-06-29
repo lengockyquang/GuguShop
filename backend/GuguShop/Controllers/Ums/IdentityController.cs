@@ -41,7 +41,10 @@ public class IdentityController : Controller
     [HttpGet("check-login")]
     public IActionResult HandleCheckLoginAction()
     {
-        return Ok(_authUser.IsAuthenticated);
+        return Ok(new {
+            IsAuthenticated = _authUser.IsAuthenticated,
+            UserName = _authUser.UserName
+        });
     }
 
     [HttpGet("logout")]

@@ -1,10 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import _ from "lodash";
+import { checkUserAuthInfo } from "../services/identity.service";
 
-export const identitySlice =  createSlice({
+export const identitySlice = createSlice({
     name: 'identity',
     initialState: {
         isAuthenticated: false,
-        userName: null
+        userName: ''
     },
     reducers: {
         loginEvent: (state: any, action: any) => {
@@ -16,7 +18,25 @@ export const identitySlice =  createSlice({
             state.isAuthenticated = false;
             state.userName = null;
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(checkLoginAsync.fulfilled, (state, action) => {
+            state.isAuthenticated = action.payload.isAuthenticated;
+            state.userName = action.payload.userName;
+        });
     }
 });
+
+export const checkLoginAsync = createAsyncThunk(
+    'identity/checkLogin',
+    async () => {
+        const response = await checkUserAuthInfo();
+        const data = _.get(response, 'data');
+        return {
+            isAuthenticated: response.status === 200 && _.get(data, 'isAuthenticated', false),
+            userName: _.get(data, 'userName')
+        };
+    }
+)
 
 export const { loginEvent, logoutEvent } = identitySlice.actions;

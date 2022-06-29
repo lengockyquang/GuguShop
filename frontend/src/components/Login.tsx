@@ -6,26 +6,29 @@ import { login } from '../services/identity.service';
 import { displayErrorNotify, displaySuccessNotify } from '../utils/common';
 import {useDispatch} from 'react-redux';
 import { loginEvent } from '../redux/identitySlice';
+import { useNavigate } from 'react-router-dom';
+import _ from 'lodash';
 
 interface Props {
     callback?: () => void;
 }
 
 function Login(props: Props) {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [form] = Form.useForm();
 
     const onFinish = async (values: LoginForm) => {
-        console.log(values);
         const loginResponse = await login(values);
         if(loginResponse.status === 200){
             displaySuccessNotify();
             dispatch(loginEvent("test-username"));
+            props.callback?.();
+            navigate('/');
         }
         else{
             displayErrorNotify();
         }
-        props.callback?.();
     }
 
     return (

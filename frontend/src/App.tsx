@@ -1,6 +1,6 @@
-import React, { Suspense } from 'react';
-import './App.scss';
+import { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import './App.scss';
 import AppRoute from './AppRoute';
 import Loading from './components/Loading';
 

@@ -1,5 +1,5 @@
 import { Button } from 'antd'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { identitySelector } from '../redux/selector'
 import ApplicationModal, { ApplicationModalRef } from './ApplicationModal'
@@ -9,7 +9,7 @@ function AuthToolbar() {
     const identityInfo = useSelector(identitySelector);
     const loginModalRef = useRef<ApplicationModalRef>(null);
 
-    const openLoginForm =() => {
+    const openLoginForm = () => {
         loginModalRef.current?.onOpen();
     }
 
@@ -27,11 +27,12 @@ function AuthToolbar() {
             />
         )
     }
-    console.log(identityInfo)
-    if(identityInfo.isAuthenticated){
-        return <div>
-            {'Đã đăng nhập'}
-        </div>;
+    if (identityInfo.isAuthenticated) {
+        return (
+            <div className='auth-toolbar'>
+                {'Đã đăng nhập'}
+            </div>
+        );
     }
     return (
         <div className='auth-toolbar'>
