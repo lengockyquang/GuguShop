@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GuguShop.Controllers.Business;
 
-[Authorize]
 [Route("api/sample")]
 public class SampleController: Controller
 {

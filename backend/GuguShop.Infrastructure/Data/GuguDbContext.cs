@@ -10,6 +10,10 @@ namespace GuguShop.Infrastructure.Data
     public class GuguDbContext:  IdentityDbContext<
         User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
+        public GuguDbContext()
+        {
+
+        }
         public GuguDbContext(DbContextOptions options): base(options)
         {
         }

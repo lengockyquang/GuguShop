@@ -5,6 +5,8 @@ using GuguShop.Domain.Entities;
 using GuguShop.Infrastructure.Specification;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using GuguShop.Infrastructure.Utility;
+using System.Security.Claims;
 
 namespace GuguShop.Controllers.Business;
 
@@ -14,9 +16,14 @@ namespace GuguShop.Controllers.Business;
 public class CategoryController : Controller
 {
     private readonly ICategoryService _categoryService;
-    public CategoryController(ICategoryService categoryService)
+    private readonly IAuthUser _authUser;
+    private static ClaimsPrincipal _principalAccessor;
+
+    public CategoryController(ICategoryService categoryService, IAuthUser authUser, ClaimsPrincipal principalAccessor)
     {
         _categoryService = categoryService;
+        _authUser = authUser;
+        _principalAccessor = principalAccessor;
     }
 
     [HttpGet]

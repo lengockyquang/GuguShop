@@ -1,16 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop", "GuguShop\GuguShop.csproj", "{AB16FB70-FA3A-454F-AB96-D445416E1A4C}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuguShop", "GuguShop\GuguShop.csproj", "{AB16FB70-FA3A-454F-AB96-D445416E1A4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Domain", "GuguShop.Domain\GuguShop.Domain.csproj", "{A1E140A3-76DA-48FD-AA1E-459A36F99418}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuguShop.Domain", "GuguShop.Domain\GuguShop.Domain.csproj", "{A1E140A3-76DA-48FD-AA1E-459A36F99418}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Infrastructure", "GuguShop.Infrastructure\GuguShop.Infrastructure.csproj", "{D8E8426B-A71B-4411-A7FC-37A4504C5A26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuguShop.Infrastructure", "GuguShop.Infrastructure\GuguShop.Infrastructure.csproj", "{D8E8426B-A71B-4411-A7FC-37A4504C5A26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Application", "GuguShop.Application\GuguShop.Application.csproj", "{7577D603-F5CF-471E-B5B9-F365FEE9B613}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuguShop.Application", "GuguShop.Application\GuguShop.Application.csproj", "{7577D603-F5CF-471E-B5B9-F365FEE9B613}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Migrator", "GuguShop.Migrator\GuguShop.Migrator.csproj", "{92243A4A-517E-41CE-A2A3-F4683074C95F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuguShop.Migrator", "GuguShop.Migrator\GuguShop.Migrator.csproj", "{92243A4A-517E-41CE-A2A3-F4683074C95F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.GridFsApplication", "GuguShop.GridFsApplication\GuguShop.GridFsApplication.csproj", "{A54C3416-17A4-4A07-9250-0C9C538C3E4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuguShop.GridFsApplication", "GuguShop.GridFsApplication\GuguShop.GridFsApplication.csproj", "{A54C3416-17A4-4A07-9250-0C9C538C3E4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuguShop.Test", "GuguShop.Test\GuguShop.Test.csproj", "{40AA8D66-2DFC-4A39-B219-1B315B9FA68C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,5 +47,15 @@ Global
 		{A54C3416-17A4-4A07-9250-0C9C538C3E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A54C3416-17A4-4A07-9250-0C9C538C3E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A54C3416-17A4-4A07-9250-0C9C538C3E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40AA8D66-2DFC-4A39-B219-1B315B9FA68C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40AA8D66-2DFC-4A39-B219-1B315B9FA68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40AA8D66-2DFC-4A39-B219-1B315B9FA68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40AA8D66-2DFC-4A39-B219-1B315B9FA68C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {28C4D8B3-2518-4656-8C23-463860241631}
 	EndGlobalSection
 EndGlobal

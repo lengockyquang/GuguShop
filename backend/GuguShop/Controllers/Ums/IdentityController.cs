@@ -48,7 +48,7 @@ public class IdentityController : Controller
     }
 
     [HttpGet("logout")]
-    public async Task<IActionResult> HandleLogoutAction()
+    public async Task<ActionResult<ApiResponse<object>>> HandleLogoutAction()
     {
         await _signInManager.SignOutAsync();
         return Ok();
@@ -63,6 +63,6 @@ public class IdentityController : Controller
         {
             return Ok();
         }
-        return Ok(result.Errors);
+        return Ok(result);
     }
 }
