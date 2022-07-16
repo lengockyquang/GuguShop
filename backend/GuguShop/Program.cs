@@ -1,7 +1,6 @@
 using GuguShop.Application.Extensions;
 using GuguShop.GridFsApplication.Extensions;
 using GuguShop.Infrastructure.Extensions;
-using GuguShop.Middlewares;
 using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);

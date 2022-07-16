@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using GuguShop.Infrastructure.Utility;
 using System.Security.Claims;
+using System.ComponentModel;
+using GuguShop.Attributes;
 
 namespace GuguShop.Controllers.Business;
 
@@ -16,14 +18,9 @@ namespace GuguShop.Controllers.Business;
 public class CategoryController : Controller
 {
     private readonly ICategoryService _categoryService;
-    private readonly IAuthUser _authUser;
-    private static ClaimsPrincipal _principalAccessor;
-
-    public CategoryController(ICategoryService categoryService, IAuthUser authUser, ClaimsPrincipal principalAccessor)
+    public CategoryController(ICategoryService categoryService)
     {
         _categoryService = categoryService;
-        _authUser = authUser;
-        _principalAccessor = principalAccessor;
     }
 
     [HttpGet]
@@ -33,6 +30,7 @@ public class CategoryController : Controller
         return Ok(await _categoryService.GetListAsync(specification, cancellationToken));
     }
 
+    [CustomAuthorize]
     [HttpGet("combo")]
     public async Task<IActionResult> HandleGetComboData(CancellationToken cancellationToken = default)
     {

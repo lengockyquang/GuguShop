@@ -17,8 +17,4 @@
       <ProjectReference Include="..\GuguShop.Infrastructure\GuguShop.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Attributes\" />
-    </ItemGroup>
-
 </Project>
