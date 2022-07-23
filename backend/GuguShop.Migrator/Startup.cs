@@ -41,8 +41,17 @@ public class Startup
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/",
-                    async context => { await context.Response.WriteAsync("Gugu shop"); });
+                    async context => { await context.Response.WriteAsync("Gugu shop migrator"); });
             });
+
+
+            var serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var serviceScope = serviceScopeFactory.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetService<MigratorDbContext>();
+                dbContext.Database.EnsureCreated();
+            }
+
         }
     }
 }

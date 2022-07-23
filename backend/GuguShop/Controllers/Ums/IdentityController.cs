@@ -26,22 +26,37 @@ public class IdentityController : Controller
     [HttpPost("login")]
     public async Task<IActionResult> HandleLoginAction([FromBody] LoginForm loginForm)
     {
-        var result = await _signInManager.PasswordSignInAsync(
-            loginForm.UserName,
-            loginForm.Password,
-            loginForm.RememberMe,
-            false);
-        if (result.Succeeded)
+        _logger.LogInformation("Start request");
+        try
         {
-            return Ok();
+            var result = await _signInManager.PasswordSignInAsync(
+                loginForm.UserName,
+                loginForm.Password,
+                loginForm.RememberMe,
+                false);
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+            return BadRequest("Username or password is incorrect");
         }
-        return BadRequest("Username or password is incorrect");
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            _logger.LogInformation(ex.Message);
+            throw;
+        }
+        finally
+        {
+            _logger.LogInformation("End request");
+        }
     }
 
     [HttpGet("check-login")]
     public IActionResult HandleCheckLoginAction()
     {
-        return Ok(new {
+        return Ok(new
+        {
             IsAuthenticated = _authUser.IsAuthenticated,
             UserName = _authUser.UserName
         });
