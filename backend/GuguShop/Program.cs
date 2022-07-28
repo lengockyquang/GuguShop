@@ -1,4 +1,5 @@
 using GuguShop.Application.Extensions;
+using GuguShop.Caching.Extensions;
 using GuguShop.GridFsApplication.Extensions;
 using GuguShop.Infrastructure.Extensions;
 using Newtonsoft.Json;
@@ -17,10 +18,12 @@ builder.Services.SetupAuthentication();
 builder.Services.SetupMiniProfiler();
 builder.Services.SetupApplication();
 builder.Services.SetupMongoGridFs(configuration);
+builder.Services.SetupCaching(configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDistributedMemoryCache();
 
 builder.Host.SetupSerilogHostBuilder();
 

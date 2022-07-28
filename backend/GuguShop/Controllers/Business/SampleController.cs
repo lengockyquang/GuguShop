@@ -1,7 +1,9 @@
-﻿using GuguShop.Infrastructure.Exceptions;
+﻿using GuguShop.Caching.Interfaces;
+using GuguShop.Infrastructure.Exceptions;
 using GuguShop.Infrastructure.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace GuguShop.Controllers.Business;
 
@@ -9,9 +11,11 @@ namespace GuguShop.Controllers.Business;
 public class SampleController: Controller
 {
     private readonly ICryptoService _cryptoService;
-    public SampleController(ICryptoService cryptoService)
+    private readonly IGuguCache _guguCache;
+    public SampleController(ICryptoService cryptoService, IGuguCache guguCache)
     {
         _cryptoService = cryptoService;
+        _guguCache = guguCache;
     }
 
     [HttpGet("encrypt")]
@@ -33,6 +37,12 @@ public class SampleController: Controller
     {
         var value = GetRandomInteger(); 
         return Ok(value.Result);
+    }
+
+    [HttpGet("test-redis")]
+    public IActionResult HandleTestRedis()
+    {
+        return Ok(_guguCache.GetStatus());
     }
 
     private static async Task<int> GetRandomInteger()

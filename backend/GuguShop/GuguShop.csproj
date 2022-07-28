@@ -7,12 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.6" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.7" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\GuguShop.Application\GuguShop.Application.csproj" />
+      <ProjectReference Include="..\GuguShop.Caching\GuguShop.Caching.csproj" />
       <ProjectReference Include="..\GuguShop.GridFsApplication\GuguShop.GridFsApplication.csproj" />
       <ProjectReference Include="..\GuguShop.Infrastructure\GuguShop.Infrastructure.csproj" />
     </ItemGroup>

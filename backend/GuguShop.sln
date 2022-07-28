@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Caching", "GuguShop.Caching\GuguShop.Caching.csproj", "{E68D94BA-0D18-4B9D-BF46-FCE84D30E08D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{40AA8D66-2DFC-4A39-B219-1B315B9FA68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40AA8D66-2DFC-4A39-B219-1B315B9FA68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40AA8D66-2DFC-4A39-B219-1B315B9FA68C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E68D94BA-0D18-4B9D-BF46-FCE84D30E08D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E68D94BA-0D18-4B9D-BF46-FCE84D30E08D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E68D94BA-0D18-4B9D-BF46-FCE84D30E08D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E68D94BA-0D18-4B9D-BF46-FCE84D30E08D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
