@@ -1,13 +1,13 @@
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setAuth } from '../app/identitySlice';
-import { loginAsync, okStatusCode } from '../services/identity.service';
-import { notificationError } from '../utils/common';
+import { setAuth } from '../redux/identitySlice';
+import {  loginAsync, okStatusCode } from '../services/identity.service';
+import { displayErrorNotify } from '../utils/common';
 function LoginPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const onSubmit = async (values) => {
+    const onSubmit = async (values: any) => {
         const response = await loginAsync(values);
         if (response.status === okStatusCode) {
             const data = response.data;
@@ -21,11 +21,11 @@ function LoginPage() {
                 window.location.reload();
             }
             else {
-                notificationError("Please recheck your login info and try again !");
+                displayErrorNotify("Please recheck your login info and try again !");
             }
         }
         else {
-            notificationError("Please contact your administrator !");
+            displayErrorNotify("Please contact your administrator !");
         }
     };
 

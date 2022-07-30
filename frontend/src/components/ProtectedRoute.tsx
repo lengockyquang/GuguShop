@@ -1,58 +1,15 @@
-import { Button } from "antd";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { checkLoginAsync, logoutEvent } from "../redux/identitySlice";
-import { identitySelector } from "../redux/selector";
-import { logout } from "../services/identity.service";
-import { displayErrorNotify } from "../utils/common";
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import {useSelector} from 'react-redux';
+import {Outlet} from 'react-router-dom';
+import { identitySelector } from '../redux/selector';
+import Forbidden from './Forbidden';
 
-type Props = {
-	children: React.ReactChild
-	| React.ReactChild[]
-	| React.ReactNode
-	| JSX.Element
-	| JSX.Element[]
-	;
-};
+function ProtectedRoute() {
+    const identityInfo = useSelector(identitySelector);
+    const {isAuthenticated} = identityInfo;
+    return isAuthenticated ? (
+        <Outlet/>
+    ) : <Forbidden />
+}
 
-const ProtectedRoute = (props: Props) => {
-	const navigate = useNavigate();
-	const identityInfo = useSelector(identitySelector);
-	const dispatch = useDispatch();
-
-
-	useEffect(() => {
-		dispatch(checkLoginAsync());
-	},[dispatch]);
-
-	const onLogout = async () =>{
-		const response = await logout();
-		if(response.status === 200){
-			dispatch(logoutEvent);
-			navigate('/login');
-		}
-		else{
-			displayErrorNotify("Đăng xuất thất bại !");
-		}
-	}
-	
-	if(!identityInfo.isAuthenticated){
-		navigate('/login');
-	}
-
-	return (
-		<div className="auth-layout">
-			Xin chào {identityInfo.userName}
-			<Button type="primary" onClick={onLogout} style={{
-				float:'right'
-			}}>
-				Đăng xuất
-			</Button>
-			<hr/>
-			{props.children}
-		</div>
-	);
-};
-
-export default ProtectedRoute;
+export default ProtectedRoute

@@ -11,9 +11,13 @@ namespace GuguShop.Caching.Extensions
         public static IServiceCollection SetupCaching(this IServiceCollection services, IConfiguration configuration)
         {
             //Configure other services up here
-            var multiplexer = ConnectionMultiplexer.Connect(configuration.GetSection("RedisConnectionString").Value);
-            services.AddSingleton<IConnectionMultiplexer>(multiplexer);
-            services.AddScoped<IGuguCache, ExternalGuguCache>();
+            var connectionString = configuration.GetSection("RedisConnectionString").Value;
+            if(!string.IsNullOrEmpty(connectionString))
+            {
+                var multiplexer = ConnectionMultiplexer.Connect(connectionString);
+                services.AddSingleton<IConnectionMultiplexer>(multiplexer);
+                services.AddScoped<IGuguCache, ExternalGuguCache>();
+            }
             return services;
         }
     }

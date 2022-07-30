@@ -1,11 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { identitySlice } from './identitySlice';
-
-
-const store = configureStore({
-    reducer: {
-        identity: identitySlice.reducer
-    }
+import { configureStore } from '@reduxjs/toolkit'
+import identityReducer from './identitySlice';
+export const store = configureStore({
+  reducer: {
+    identity: identityReducer
+  },
 });
-
-export default store;

@@ -1,22 +1,21 @@
-import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import Login from './components/Login';
+import React from 'react'
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import LoginPage from './components/LoginPage';
 import NotFound from './components/NotFound';
-import CustomerProductRoute from './features/customer/product';
-
-function AppRoute() {
+import ProtectedRoute from './components/ProtectedRoute';
+import ProductList from './features/customer/product/components/product.list';
+const AppRoute = () => {
     return (
-        <React.Fragment>
-            <Routes>
-                <Route path={'/'} element={<Navigate to={"/home"} />} />
-                <Route path='/login' element={<Login />} />
-                <Route path={"/home"}>
-                    {CustomerProductRoute()}
-                </Route>
-                <Route path={'*'} element={<NotFound />} />
-            </Routes>
-        </React.Fragment>
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route element={<ProtectedRoute />}>
+                <Route path="/private" element={<ProductList />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+        </Routes>
     )
 }
 
-export default AppRoute
+export default AppRoute;

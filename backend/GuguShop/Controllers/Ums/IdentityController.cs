@@ -36,7 +36,9 @@ public class IdentityController : Controller
                 false);
             if (result.Succeeded)
             {
-                return Ok();
+                return Ok(new {
+                    Succeeded = true
+                });
             }
             return BadRequest("Username or password is incorrect");
         }

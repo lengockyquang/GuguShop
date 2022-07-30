@@ -1,17 +1,17 @@
 import { Button } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuth } from '../app/identitySlice';
-import { identitySelector } from '../app/selector';
+import { setAuth } from '../redux/identitySlice';
+import { identitySelector } from '../redux/selector';
 import { checkLoginAsync, logoutAsync, okStatusCode } from '../services/identity.service';
-import { notificationError } from '../utils/common';
+import { displayErrorNotify } from '../utils/common';
 
-function AuthProvider(props) {
-    const identityInfo = useSelector(identitySelector);
+function AuthProvider(props: any) {
+    const identityInfo: any = useSelector<any>(identitySelector);
     const dispatch = useDispatch();
     useEffect(() => {
         const request = checkLoginAsync();
-        request.then(response => {
+        request.then((response: any) => {
             if (response.status === okStatusCode) {
                 const data = response.data
                 dispatch(setAuth({
@@ -34,19 +34,18 @@ function AuthProvider(props) {
             window.location.href = "/"
         }
         else {
-            notificationError("Can not logout. Please contact your administrator !");
+            displayErrorNotify("Can not logout. Please contact your administrator !");
         }
     }
 
     const renderAuthToolbar = () => {
-        const { isAuthenticated } = identityInfo;
         return (
             <div className='auth-toolbar' style={{ height: 30 }}>
                 <div className='left-side' style={{ float: 'left'}}>
                     <span style={{fontWeight: 700, fontSize: 16}} >{identityInfo.isAuthenticated && 'Hello ' + identityInfo.userName}</span>
                 </div>
                 <div className='right-side' style={{ float: 'right' }}>
-                    {!isAuthenticated ? (
+                    {!identityInfo.isAuthenticated ? (
                         <Button onClick={goToLogin} >Login</Button>
                     ) : <Button onClick={logout} >Logout</Button>}
                 </div>
