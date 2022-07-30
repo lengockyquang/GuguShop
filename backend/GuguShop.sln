@@ -19,10 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuguShop.Test", "GuguShop.T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F110221F-CE9F-4AAB-B8AD-3206B2C9CFD0}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuguShop.Caching", "GuguShop.Caching\GuguShop.Caching.csproj", "{E68D94BA-0D18-4B9D-BF46-FCE84D30E08D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuguShop.Caching", "GuguShop.Caching\GuguShop.Caching.csproj", "{E68D94BA-0D18-4B9D-BF46-FCE84D30E08D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
