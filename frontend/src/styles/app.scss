@@ -1,6 +1,14 @@
 
-.auth-layout{
+.auth-wrapper{
     padding: 10px;
+    .menu{
+        display: flex;
+        .menu-item{
+            flex: 1;
+            max-width: 100px;
+            margin-right: 10px;
+        }
+    }
 }
 
 .login-form{

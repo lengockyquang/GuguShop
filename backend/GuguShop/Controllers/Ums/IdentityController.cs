@@ -26,32 +26,19 @@ public class IdentityController : Controller
     [HttpPost("login")]
     public async Task<IActionResult> HandleLoginAction([FromBody] LoginForm loginForm)
     {
-        _logger.LogInformation("Start request");
-        try
-        {
-            var result = await _signInManager.PasswordSignInAsync(
+        var result = await _signInManager.PasswordSignInAsync(
                 loginForm.UserName,
                 loginForm.Password,
                 loginForm.RememberMe,
                 false);
-            if (result.Succeeded)
+        if (result.Succeeded)
+        {
+            return Ok(new
             {
-                return Ok(new {
-                    Succeeded = true
-                });
-            }
-            return BadRequest("Username or password is incorrect");
+                Succeeded = true
+            });
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            _logger.LogInformation(ex.Message);
-            throw;
-        }
-        finally
-        {
-            _logger.LogInformation("End request");
-        }
+        return BadRequest("Username or password is incorrect");
     }
 
     [HttpGet("check-login")]
@@ -76,10 +63,6 @@ public class IdentityController : Controller
     {
         var user = new User() { UserName = registerForm.UserName, Email = registerForm.Email };
         var result = await _userManager.CreateAsync(user, registerForm.Password);
-        if (result.Succeeded)
-        {
-            return Ok();
-        }
-        return Ok(result);
+        return result.Succeeded ? Ok() : Ok(result);
     }
 }
