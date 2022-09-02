@@ -18,7 +18,7 @@ builder.Services.SetupAuthentication();
 builder.Services.SetupMiniProfiler();
 builder.Services.SetupApplication();
 builder.Services.SetupMongoGridFs(configuration);
-//builder.Services.SetupCaching(configuration);
+builder.Services.SetupCaching(configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
