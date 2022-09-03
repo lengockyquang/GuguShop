@@ -1,14 +1,16 @@
 import { Button } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../redux/identitySlice';
 import { identitySelector } from '../redux/selector';
 import { checkLoginAsync, logoutAsync, okStatusCode } from '../services/identity.service';
 import { displayErrorNotify } from '../utils/common';
+import Loading from './Loading';
 
 function AuthProvider(props: any) {
     const identityInfo: any = useSelector<any>(identitySelector);
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState<boolean>(true);
     useEffect(() => {
         const request = checkLoginAsync();
         request.then((response: any) => {
@@ -19,6 +21,15 @@ function AuthProvider(props: any) {
                     userName: data.userName
                 }))
             }
+        })
+        .catch((error) => {
+            console.log(error)
+            displayErrorNotify("Có lỗi xảy ra !");
+        })
+        .finally(() => {
+            setTimeout(()=>{
+                setLoading(false);
+            }, 500)
         })
     }, []);
 
@@ -55,6 +66,7 @@ function AuthProvider(props: any) {
 
     return (
         <div className='auth-wrapper'>
+            <Loading loading={loading} />
             {renderAuthToolbar()}
             <hr />
             {props.children}

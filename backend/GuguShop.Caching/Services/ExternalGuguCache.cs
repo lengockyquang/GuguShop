@@ -34,11 +34,7 @@ namespace GuguShop.Caching.Services
         public async Task<T> GetAsync<T>(string key) where T : class
         {
             var redisValue = await _database.StringGetAsync(key);
-            if(redisValue.HasValue)
-            {
-                return JsonSerializer.Deserialize<T>(redisValue);
-            }
-            return null;
+            return redisValue.HasValue ? JsonSerializer.Deserialize<T>(redisValue) : null;
         }
 
         public async Task RemoveAsync(string key)

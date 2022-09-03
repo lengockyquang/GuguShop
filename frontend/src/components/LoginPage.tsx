@@ -9,9 +9,19 @@ function LoginPage() {
     const navigate = useNavigate();
     const onSubmit = async (values: any) => {
         const response = await loginAsync(values);
-        if (response.status === okStatusCode) {
+        if(response.status !== okStatusCode)
+        {
+            displayErrorNotify("Please contact your administrator !");
+        }
+        else
+        {
             const data = response.data;
-            if (data.succeeded) {
+            if(!data.succeeded)
+            {
+                displayErrorNotify("Please recheck your login info and try again !");
+            }
+            else
+            {
                 dispatch(setAuth({
                     isAuthenticated: data.isAuthenticated,
                     userName: data.userName
@@ -20,12 +30,6 @@ function LoginPage() {
                 // eslint-disable-next-line no-undef
                 window.location.reload();
             }
-            else {
-                displayErrorNotify("Please recheck your login info and try again !");
-            }
-        }
-        else {
-            displayErrorNotify("Please contact your administrator !");
         }
     };
 

@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react'
-import { ReactComponent as IconLoading } from '../assets/loading.svg';
+import { ReactComponent as IconLoading } from '../assets/loading2.svg';
 
 type LoadingProps = {
     text?: string;
@@ -21,7 +21,8 @@ const Loading = (props: LoadingProps) => {
                 width: '100%',
                 height: '100%',
                 position: 'absolute',
-                zIndex: 999999
+                zIndex: 999999,
+                background: '#fff'
             }}
         >
             <IconLoading />

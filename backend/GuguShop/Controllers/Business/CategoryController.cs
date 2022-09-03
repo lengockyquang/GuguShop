@@ -1,13 +1,9 @@
-﻿using System.Diagnostics;
-using GuguShop.Application.Dto;
+﻿using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
 using GuguShop.Domain.Entities;
 using GuguShop.Infrastructure.Specification;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GuguShop.Infrastructure.Utility;
-using System.Security.Claims;
-using System.ComponentModel;
 using GuguShop.Attributes;
 
 namespace GuguShop.Controllers.Business;
