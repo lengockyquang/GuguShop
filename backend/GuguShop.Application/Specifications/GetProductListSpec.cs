@@ -1,32 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq;
 using GuguShop.Domain.Entities;
 using GuguShop.Infrastructure.Specification;
-using GuguShop.Infrastructure.Utility;
 
 namespace GuguShop.Application.Specifications;
 
 public class GetProductListSpec : Specification<Product>
 {
-    public GetProductListSpec()
+    public GetProductListSpec(int limit, int offset)
     {
         Filter = null;
         Order = queryable => queryable.OrderBy(x => x.Name);
         IncludeProperties = "Category, Manufacturer";
-    }
-
-    public GetProductListSpec(int limit, int offset) : base(limit, offset)
-    {
-    }
-
-    public GetProductListSpec(Expression<Func<Product, bool>> filter,
-        Func<IQueryable<Product>, IOrderedQueryable<Product>> order,
-        string includeProperties) : base(filter,
-        order,
-        includeProperties,
-        EfTrackingType.DefaultTracking
-    )
-    {
+        Limit = limit == 0 ? -1 : limit;
+        Offset = offset;
     }
 }

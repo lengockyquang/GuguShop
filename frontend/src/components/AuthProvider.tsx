@@ -24,7 +24,7 @@ function AuthProvider(props: any) {
         })
         .catch((error) => {
             console.log(error)
-            displayErrorNotify("Có lỗi xảy ra !");
+            displayErrorNotify("Error occurred");
         })
         .finally(() => {
             setTimeout(()=>{

@@ -18,9 +18,9 @@ namespace GuguShop.Controllers.Business
         }
         
         [HttpGet]
-        public async Task<IActionResult> HandleIndexAction(CancellationToken cancellationToken = default)
+        public async Task<IActionResult> HandleIndexAction(int limit, int offset, CancellationToken cancellationToken = default)
         {
-            var indexSpecification = new GetProductListSpec();
+            var indexSpecification = new GetProductListSpec(limit, offset);
             return Ok(await _productService.GetListAsync(indexSpecification, cancellationToken));
         }
         

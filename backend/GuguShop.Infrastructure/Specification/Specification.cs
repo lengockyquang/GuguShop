@@ -12,8 +12,8 @@ public class Specification<TEntity> where TEntity: Entity<Guid>
     public Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> Order { get; set; }
     public string IncludeProperties { get; set; }
     public EfTrackingType EfTrackingType { get; set; }
-    public int Limit { get; set; } = -1;
-    public int Offset { get; set; } = 0;
+    public int Limit { get; set; }
+    public int Offset { get; set; }
 
     public Specification()
     {
@@ -22,6 +22,10 @@ public class Specification<TEntity> where TEntity: Entity<Guid>
 
     public Specification(int limit, int offset)
     {
+        if(limit == 0)
+        {
+            limit = -1;
+        }
         Limit = limit;
         Offset = offset;
     }

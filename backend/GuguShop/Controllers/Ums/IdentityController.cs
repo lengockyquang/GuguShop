@@ -38,7 +38,7 @@ public class IdentityController : Controller
                 Succeeded = true
             });
         }
-        return BadRequest("Username or password is incorrect");
+        return BadRequest("Tài khoản hoặc mật khẩu không đúng");
     }
 
     [HttpGet("check-login")]

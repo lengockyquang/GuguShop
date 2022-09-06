@@ -33,7 +33,7 @@ function useTable(props: Props) {
     const renderTable = () =>{
         return (
             <div className='table-wrapper'>
-                <Table dataSource={data} columns={props.columns} />
+                <Table dataSource={data} columns={props.columns} rowKey={'id'} />
             </div>
         )
     }
