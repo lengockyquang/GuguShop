@@ -23,7 +23,14 @@ namespace GuguShop.Controllers.Business
             var indexSpecification = new GetProductListSpec(limit, offset);
             return Ok(await _productService.GetListAsync(indexSpecification, cancellationToken));
         }
-        
+
+        [HttpGet("home-page")]
+        public async Task<IActionResult> HandleProductsHomePageAction(int limit, int offset, CancellationToken cancellationToken = default)
+        {
+            var indexSpecification = new GetProductListSpec(limit, offset);
+            return Ok(await _productService.GetListAsync(indexSpecification, cancellationToken));
+        }
+
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> HandleShowAction(Guid id, CancellationToken cancellationToken = default)
         {
