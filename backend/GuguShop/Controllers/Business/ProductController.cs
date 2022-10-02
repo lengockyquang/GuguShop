@@ -24,6 +24,7 @@ namespace GuguShop.Controllers.Business
             return Ok(await _productService.GetListAsync(indexSpecification, cancellationToken));
         }
 
+        [AllowAnonymous]
         [HttpGet("home-page")]
         public async Task<IActionResult> HandleProductsHomePageAction(int limit, int offset, CancellationToken cancellationToken = default)
         {
