@@ -4,7 +4,6 @@ using GuguShop.Domain.Entities;
 using GuguShop.Infrastructure.Specification;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GuguShop.Attributes;
 
 namespace GuguShop.Controllers.Business;
 
@@ -26,7 +25,6 @@ public class CategoryController : Controller
         return Ok(await _categoryService.GetListAsync(specification, cancellationToken));
     }
 
-    [CustomAuthorize]
     [HttpGet("combo")]
     public async Task<IActionResult> HandleGetComboData(CancellationToken cancellationToken = default)
     {

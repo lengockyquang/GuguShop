@@ -32,28 +32,32 @@ function HomePage() {
         return <Loading loading={loading} />
     }
 
+    const renderProducts = (products: Array<ProductHomepageDto[]>) => {
+        return _.map(products, (productsByRow: ProductHomepageDto[]) => {
+            return (
+                <div className="row gx-4 gx-lg-5 row-cols-sm-3 row-cols-md-3 row-cols-xl-4">
+                    {renderProductItem(productsByRow)}
+                </div>
+            )
+        });
+    }
+
+    const renderProductItem = (productsByRow: ProductHomepageDto[]) => {
+        return productsByRow.map((product: ProductHomepageDto, index: number) => {
+            return <ProductItem
+                key={`product-${index}`}
+                name={product.name}
+                isSale={product.isSale}
+                price={product.price}
+                thumbnail={product.thumbnail}
+            />
+        }) 
+    }
+
     return (
         <section className='py-5'>
             <div className="container px-4 px-lg-5 mt-5">
-                {
-                    _.map(products, (productsByRow: ProductHomepageDto[]) => {
-                        return (
-                            <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                                {
-                                    productsByRow.map((product: ProductHomepageDto, index: number) => {
-                                        return <ProductItem
-                                            key={`product-${index}`}
-                                            name={product.name}
-                                            isSale={product.isSale}
-                                            price={product.price}
-                                            thumbnail={product.thumbnail}
-                                        />
-                                    })
-                                }
-                            </div>
-                        )
-                    })
-                }
+                {renderProducts(products)}
             </div>
         </section>
     )
