@@ -1,5 +1,5 @@
-import { Category } from "../../../../domain/category";
-import { Manufacturer } from "../../../../domain/manufacturer";
+import { Category } from "../../../domain/category";
+import { Manufacturer } from "../../../domain/manufacturer";
 
 export const ProductListColumnsConfig =[{
     title: 'Tên sản phẩm',

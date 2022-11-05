@@ -1,8 +1,8 @@
 import { Button } from 'antd';
 import React, { useRef } from 'react'
-import ApplicationModal, { ApplicationModalRef } from '../../../../components/ApplicationModal';
-import useTable from '../../../../hooks/useTable';
-import { loadCategories } from '../../../../services/category.service';
+import ApplicationModal, { ApplicationModalRef } from '../../../components/ApplicationModal';
+import useTable from '../../../hooks/useTable';
+import { loadCategories } from '../../../services/category.service';
 import { CategoryColumnsConfig } from '../configs/grid.config';
 import CategoryCreateForm from './category.create-form';
 

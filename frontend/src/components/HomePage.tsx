@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { ProductHomepageDto } from "../dtos/product.homepage";
-import ProductItem from "../features/customer/product/components/product-item"
+import ProductItem from "../features/product/components/product-item"
 import { okStatusCode } from "../services/identity.service";
 import { loadHomepageProducts } from "../services/product.service";
 import Loading from "./Loading";

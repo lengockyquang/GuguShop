@@ -1,9 +1,9 @@
 import React, {  useRef } from 'react'
 import ProductCreateForm from './product.create-form';
 import { Button} from 'antd';
-import { loadProduct } from '../../../../services/product.service';
-import ApplicationModal, { ApplicationModalRef } from '../../../../components/ApplicationModal';
-import useTable from '../../../../hooks/useTable';
+import { loadProduct } from '../../../services/product.service';
+import ApplicationModal, { ApplicationModalRef } from '../../../components/ApplicationModal';
+import useTable from '../../../hooks/useTable';
 import { ProductListColumnsConfig } from '../configs/grid.config';
 
 function ProductList() {

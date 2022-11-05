@@ -1,8 +1,8 @@
 import { Button, Form, Input } from 'antd'
 import _ from 'lodash';
-import { CategoryCreateDto } from '../../../../dtos/category.create-dto';
-import { createCategory } from '../../../../services/category.service';
-import { displayErrorNotify, displaySuccessNotify } from '../../../../utils/common';
+import { CategoryCreateDto } from '../../../dtos/category.create-dto';
+import { createCategory } from '../../../services/category.service';
+import { displayErrorNotify, displaySuccessNotify } from '../../../utils/common';
 
 interface Props {
     onReload: () => void;

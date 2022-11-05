@@ -1,11 +1,11 @@
 import { Button, Form, Input, notification, Select } from 'antd'
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
-import { Combo } from '../../../../domain/combo';
-import { ProductCreateDto } from '../../../../dtos/product.create-dto';
-import { loadCategoryCombo } from '../../../../services/category.service';
-import { createProduct } from '../../../../services/product.service';
-import { displayErrorNotify, displaySuccessNotify } from '../../../../utils/common';
+import { Combo } from '../../../domain/combo';
+import { ProductCreateDto } from '../../../dtos/product.create-dto';
+import { loadCategoryCombo } from '../../../services/category.service';
+import { createProduct } from '../../../services/product.service';
+import { displayErrorNotify, displaySuccessNotify } from '../../../utils/common';
 const { Option } = Select;
 
 interface Props {
