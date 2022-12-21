@@ -16,6 +16,7 @@ function CategoryCreateForm(props: Props) {
         if (statusCode === 200) {
             props.onReload();
             displaySuccessNotify("Created successfully !");
+            form.resetFields();
         }
         else {
             displayErrorNotify();

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Combo } from '../../../domain/combo';
 import { ProductCreateDto } from '../../../dtos/product.create-dto';
 import { loadCategoryCombo } from '../../../services/category.service';
+import { loadManufacturerCombo } from '../../../services/manufacturer.service';
 import { createProduct } from '../../../services/product.service';
 import { displayErrorNotify, displaySuccessNotify } from '../../../utils/common';
 const { Option } = Select;
@@ -15,9 +16,11 @@ interface Props {
 function ProductCreateForm(props: Props) {
     const [form] = Form.useForm();
     const [categories, setCategories] = useState([]);
+    const [manufacturers, setManufacturers] = useState([]);
 
     useEffect(() => {
         loadCategoryOptions();
+        loadManufacturerOptions();
     }, [])
 
     const loadCategoryOptions = async () => {
@@ -35,17 +38,28 @@ function ProductCreateForm(props: Props) {
         }
     }
 
-    const onFinish = async (values: ProductCreateDto) => {
-        values.manufacturerId = '8FC79312-1A72-4B09-F6C2-08DA1721C052';
-        values.tagIds = [
-            '9F912BE0-CA81-4B14-A6E4-08DA3B3A6739'
-        ];
+    const loadManufacturerOptions = async () => {
+        const response = await loadManufacturerCombo();
+        const statusCode = _.get(response, 'status');
+        if (statusCode === 200) {
+            const data = _.get(response, 'data', []);
+            setManufacturers(data);
+        }
+        else {
+            notification.error({
+                message: 'Thông báo',
+                description: 'Có lỗi xảy ra !'
+            })
+        }
+    }
 
+    const onFinish = async (values: ProductCreateDto) => {
         const response = await createProduct(values);
         const statusCode = _.get(response, 'status');
         if (statusCode === 200) {
             props.onReload();
             displaySuccessNotify("Tạo mới thành công !");
+            form.resetFields();
         }
         else {
             displayErrorNotify();
@@ -56,8 +70,20 @@ function ProductCreateForm(props: Props) {
         form.setFieldsValue({ categoryId: value });
     };
 
+    const onChangeManufacturer = (value: string) =>{
+        form.setFieldsValue({ manufacturerId: value });
+    }
+
     const renderCategoryOptions = () => {
         return _.map(categories, (category: Combo, index: number) => {
+            return (
+                <Option key={index} value={category.value}>{category.label}</Option>
+            )
+        })
+    }
+
+    const renderManufacturerOptions = () =>{
+        return _.map(manufacturers, (category: Combo, index: number) => {
             return (
                 <Option key={index} value={category.value}>{category.label}</Option>
             )
@@ -105,6 +131,21 @@ function ProductCreateForm(props: Props) {
                         allowClear
                     >
                         {renderCategoryOptions()}
+                    </Select>
+                </Form.Item>
+                <Form.Item
+                    labelAlign='left'
+                    name="manufacturerId"
+                    label="Nhà sản xuất"
+                    rules={[{ required: true, message: 'Giá trị bắt buộc' }]}
+                >
+                    <Select
+                        virtual={true}
+                        placeholder="Chọn loại nhà sản xuất"
+                        onChange={onChangeManufacturer}
+                        allowClear
+                    >
+                        {renderManufacturerOptions()}
                     </Select>
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

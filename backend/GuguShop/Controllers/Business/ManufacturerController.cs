@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using GuguShop.Application.Dto;
 using GuguShop.Application.Interfaces;
+using GuguShop.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,6 +47,12 @@ namespace GuguShop.Controllers.Business
         public async Task<IActionResult> HandleDeleteAction(Guid id)
         {
             return Ok(await _manufacturerService.RemoveAsync(id));
+        }
+
+        [HttpGet("combo")]
+        public async Task<IActionResult> HandleGetComboData(CancellationToken cancellationToken = default)
+        {
+            return Ok(await _manufacturerService.GetComboDataAsync(cancellationToken));
         }
     }
 }
