@@ -26,11 +26,13 @@ namespace GuguShop.Infrastructure.Extensions
             serviceCollection.AddTransient<ICategoryRepository, CategoryRepository>();
             serviceCollection.AddTransient<IManufacturerRepository, ManufacturerRepository>();
             serviceCollection.AddTransient<ITagRepository, TagRepository>();
+            serviceCollection.AddTransient<IFileRepository, FileRepository>();
 
             serviceCollection.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
             serviceCollection.AddScoped<ICryptoService, CryptoService>();
             serviceCollection.AddScoped<ICustomJwtGenerator, CustomJwtGenerator>();
+            serviceCollection.AddScoped<IFileService, FileService>();
             return serviceCollection;
         }
 

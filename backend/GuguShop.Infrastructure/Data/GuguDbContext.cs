@@ -28,6 +28,7 @@ namespace GuguShop.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ConfigureEntities();
             modelBuilder.ConfigureUmsEntities();
+            modelBuilder.ConfigureFileEntities();
         }
     }
 }
