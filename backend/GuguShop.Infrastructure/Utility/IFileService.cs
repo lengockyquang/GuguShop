@@ -9,5 +9,6 @@ namespace GuguShop.Infrastructure.Utility
         Task<bool> IsExistAsync(Guid id);
         Task<bool> UploadAsync(IFormFile file);
         Task<bool> DeleteAsync(Guid id);
+        Task<Tuple<string, string>> GetFileLocation(Guid id);
     }
 }

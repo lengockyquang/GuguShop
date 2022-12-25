@@ -15,6 +15,7 @@ namespace GuguShop.Domain.Entities
         {
             Id = Guid.NewGuid();
             FileName = fileName;
+            Extensions = Path.GetExtension(fileName);
             Location = Path.Combine(storedPath, SafeFileName);
         }
         public string FileName { get; set; }
