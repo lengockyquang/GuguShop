@@ -52,14 +52,7 @@ namespace GuguShop.Infrastructure.Utility
                 await _unitOfWork.BeginTransactionAsync();
                 await _fileRepository.Create(fileEntity);
                 // write to location
-                using var ms = new MemoryStream();
-                file.CopyTo(ms);
-                var fileBytes = ms.ToArray();
-
-                if (Directory.Exists(storedPath) == false)
-                {
-                    Directory.CreateDirectory(storedPath);
-                }
+                SetupStoredFolder(storedPath);
                 using (var fileStream = new FileStream(fileEntity.Location, FileMode.Create))
                 {
                     await file.CopyToAsync(fileStream);
@@ -71,11 +64,24 @@ namespace GuguShop.Infrastructure.Utility
             {
                 _logger.LogCritical(ex, "Upload async failed");
                 await _unitOfWork.RollBackTransactionAsync();
-                if(File.Exists(fileEntity.Location))
-                {
-                    File.Delete(fileEntity.Location);
-                }
+                TryDeleteFile(fileEntity.Location);
                 return false;
+            }
+        }
+
+        public static void SetupStoredFolder(string storedPath)
+        {
+            if (Directory.Exists(storedPath) == false)
+            {
+                Directory.CreateDirectory(storedPath);
+            }
+        }
+
+        public static void TryDeleteFile(string location)
+        {
+            if (File.Exists(location))
+            {
+                File.Delete(location);
             }
         }
     }
