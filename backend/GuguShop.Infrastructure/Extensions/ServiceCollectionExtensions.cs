@@ -33,6 +33,7 @@ namespace GuguShop.Infrastructure.Extensions
             serviceCollection.AddScoped<ICryptoService, CryptoService>();
             serviceCollection.AddScoped<ICustomJwtGenerator, CustomJwtGenerator>();
             serviceCollection.AddScoped<IFileService, FileService>();
+            serviceCollection.AddScoped<IMongoFileService, MongoFileService>();
             return serviceCollection;
         }
 

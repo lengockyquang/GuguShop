@@ -1,4 +1,4 @@
-import { Button, Form, Input, notification, Select } from 'antd'
+import { Button, Form, Input, notification, Select, Upload, UploadProps } from 'antd'
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { Combo } from '../../../domain/combo';
@@ -7,6 +7,9 @@ import { loadCategoryCombo } from '../../../services/category.service';
 import { loadManufacturerCombo } from '../../../services/manufacturer.service';
 import { createProduct } from '../../../services/product.service';
 import { displayErrorNotify, displaySuccessNotify } from '../../../utils/common';
+import { UploadOutlined } from '@ant-design/icons';
+import { RcFile, UploadChangeParam } from 'antd/lib/upload';
+
 const { Option } = Select;
 
 interface Props {
@@ -54,6 +57,9 @@ function ProductCreateForm(props: Props) {
     }
 
     const onFinish = async (values: ProductCreateDto) => {
+        values.image = values.imageRc.file.originFileObj as File;
+        _.omit(values, ['image.uid']);
+        console.log(values);
         const response = await createProduct(values);
         const statusCode = _.get(response, 'status');
         if (statusCode === 200) {
@@ -70,7 +76,7 @@ function ProductCreateForm(props: Props) {
         form.setFieldsValue({ categoryId: value });
     };
 
-    const onChangeManufacturer = (value: string) =>{
+    const onChangeManufacturer = (value: string) => {
         form.setFieldsValue({ manufacturerId: value });
     }
 
@@ -82,13 +88,26 @@ function ProductCreateForm(props: Props) {
         })
     }
 
-    const renderManufacturerOptions = () =>{
+    const renderManufacturerOptions = () => {
         return _.map(manufacturers, (category: Combo, index: number) => {
             return (
                 <Option key={index} value={category.value}>{category.label}</Option>
             )
         })
     }
+
+    const uploadProps: UploadProps = {
+        beforeUpload: (file: RcFile) => {
+            const isPNG = file.type === 'image/png';
+            if (!isPNG) {
+                displayErrorNotify("File is not png.")
+            }
+            return isPNG || Upload.LIST_IGNORE;
+        },
+        customRequest: ({file, onSuccess}) => {
+            onSuccess?.('ok');
+        }
+    };
 
 
     return (
@@ -147,6 +166,16 @@ function ProductCreateForm(props: Props) {
                     >
                         {renderManufacturerOptions()}
                     </Select>
+                </Form.Item>
+                <Form.Item
+                    labelAlign='left'
+                    name="imageRc"
+                    label="Hình ảnh"
+                    rules={[{required: true, message: 'Giá trị bắt buộc'}]}
+                >
+                    <Upload {...uploadProps}>
+                        <Button icon={<UploadOutlined />}>Upload image</Button>
+                    </Upload>
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit">

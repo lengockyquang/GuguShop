@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GuguShop.Infrastructure.Utility
@@ -41,7 +42,7 @@ namespace GuguShop.Infrastructure.Utility
             return File.Exists(fileEntity.Location);
         }
 
-        public async Task<bool> UploadAsync(IFormFile file)
+        public async Task<Guid> UploadAsync(IFormFile file, CancellationToken cancellationToken = default )
         {
             var contentRootPath = _hostingEnvironment.ContentRootPath;
             var storedPath = Path.Combine(contentRootPath, _storedFolder);
@@ -55,18 +56,18 @@ namespace GuguShop.Infrastructure.Utility
                 SetupStoredFolder(storedPath);
                 using (var fileStream = new FileStream(fileEntity.Location, FileMode.Create))
                 {
-                    await file.CopyToAsync(fileStream);
+                    await file.CopyToAsync(fileStream, cancellationToken);
                 }
                 await _unitOfWork.SaveChangesAsync();
                 await _unitOfWork.CommitTransactionAsync();
-                return true;
+                return fileEntity.Id;
             }
             catch(Exception ex)
             {
                 _logger.LogCritical(ex, "Upload async failed");
                 await _unitOfWork.RollBackTransactionAsync();
                 TryDeleteFile(fileEntity.Location);
-                return false;
+                return Guid.Empty;
             }
         }
 

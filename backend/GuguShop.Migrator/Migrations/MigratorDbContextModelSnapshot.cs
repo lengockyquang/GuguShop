@@ -155,6 +155,9 @@ namespace GuguShop.Migrator.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("ManufacturerId")
                         .HasColumnType("uniqueidentifier");
 

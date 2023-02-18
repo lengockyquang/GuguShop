@@ -13,10 +13,10 @@ const AppRoute = () => {
     return (
         <>
             <div className='menu'>
-                <Button className='menu-item' onClick={() => navigate("/")} >Home</Button>
-                <Button className='menu-item' onClick={() => navigate("/products")} >Products</Button>
-                <Button className='menu-item' onClick={() => navigate("/categories")} >Categories</Button>
-                <Button className='menu-item' onClick={() => navigate("/manufacturers")} >Manufacturers</Button>
+                <Button className='menu-item' onClick={() => navigate("/")} >Trang chủ</Button>
+                <Button className='menu-item' onClick={() => navigate("/products")} >Sản phẩm</Button>
+                <Button className='menu-item' onClick={() => navigate("/categories")} >Danh mục</Button>
+                <Button className='menu-item' onClick={() => navigate("/manufacturers")} >Nhà sản xuất</Button>
             </div>
             <Routes>
                 <Route path="/" element={<HomePage />} />

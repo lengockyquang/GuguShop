@@ -7,6 +7,7 @@ using GuguShop.Application.Interfaces;
 using GuguShop.Domain.Entities;
 using GuguShop.Domain.Repositories;
 using GuguShop.Infrastructure.Exceptions;
+using GuguShop.Infrastructure.Utility;
 
 namespace GuguShop.Application.Services
 {
@@ -15,15 +16,21 @@ namespace GuguShop.Application.Services
         private readonly IMapper _mapper;
         private readonly ITagRepository _tagRepository;
         private readonly IProductRepository _productRepository;
-        public ProductService(IMapper mapper, IProductRepository baseRepository, ITagRepository tagRepository) : base(mapper, baseRepository)
+        private readonly IMongoFileService _mongoFileService;
+        public ProductService(IMapper mapper, IProductRepository baseRepository, ITagRepository tagRepository, IMongoFileService mongoFileService) : base(mapper, baseRepository)
         {
             _mapper = mapper;
             _tagRepository = tagRepository;
             _productRepository = baseRepository;
+            _mongoFileService = mongoFileService;
         }
 
         public override async Task<ProductDto> CreateAsync(ProductCreateDto createDto)
         {
+            if(createDto.Image != null)
+            {
+                createDto.ImageId = await _mongoFileService.UploadAsync(createDto.Image);
+            }
             var createEntity = _mapper.Map<ProductCreateDto, Product>(createDto);
             var product = await _productRepository.Create(createEntity, true);
             if (createDto.TagIds.Count == 0) return _mapper.Map<Product, ProductDto>(product);

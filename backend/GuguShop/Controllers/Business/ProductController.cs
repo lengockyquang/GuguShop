@@ -39,7 +39,7 @@ namespace GuguShop.Controllers.Business
         }
 
         [HttpPost]
-        public async Task<IActionResult> HandleCreateAction([FromBody] ProductCreateDto createDto)
+        public async Task<IActionResult> HandleCreateAction([FromForm] ProductCreateDto createDto)
         {
             return Ok(await _productService.CreateAsync(createDto));
         }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuguShop.Migrator.Migrations
 {
     [DbContext(typeof(MigratorDbContext))]
-    [Migration("20221224175626_AddFileEntity")]
-    partial class AddFileEntity
+    [Migration("20230119050504_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

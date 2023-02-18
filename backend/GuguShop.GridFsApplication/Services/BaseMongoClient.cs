@@ -1,6 +1,4 @@
-﻿using GuguShop.GridFsApplication.Models;
-using Microsoft.Extensions.Options;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
 

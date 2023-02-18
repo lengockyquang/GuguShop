@@ -53,12 +53,12 @@ function AuthProvider(props: any) {
         return (
             <div className='auth-toolbar' style={{ height: 30 }}>
                 <div className='left-side' style={{ float: 'left'}}>
-                    <span style={{fontWeight: 700, fontSize: 16}} >{identityInfo.isAuthenticated && 'Hello ' + identityInfo.userName}</span>
+                    <span style={{fontWeight: 700, fontSize: 16}} >{identityInfo.isAuthenticated && 'Xin chào ' + identityInfo.userName}</span>
                 </div>
                 <div className='right-side' style={{ float: 'right' }}>
                     {!identityInfo.isAuthenticated ? (
-                        <Button onClick={goToLogin} >Login</Button>
-                    ) : <Button onClick={logout} >Logout</Button>}
+                        <Button onClick={goToLogin} >Đăng nhập</Button>
+                    ) : <Button onClick={logout} >Đăng xuất</Button>}
                 </div>
             </div>
         )

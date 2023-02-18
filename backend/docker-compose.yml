@@ -1,6 +1,6 @@
 services:
  backend:
-  image: gugu-shop
+  image: gugu_shop
   build: .
   ports:
   - "8082:80"
@@ -9,7 +9,7 @@ services:
  redis:
   image: redis
  sql-server-db:
-  container_name: sql-server-db
+  container_name: sql_server_db
   ports:
-  - "1434:1433"
+  - "1433:1433"
   build: .
