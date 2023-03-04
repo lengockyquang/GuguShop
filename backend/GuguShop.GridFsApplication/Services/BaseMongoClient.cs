@@ -49,4 +49,10 @@ public class BaseMongoClient: IBaseMongoClient
         var bucket = new GridFSBucket(GetMongoDatabase(), _bucketOptions);
         return await bucket.UploadFromBytesAsync(fileName, bytes, null, cancellationToken);
     }
+
+    public async Task<byte[]> DownloadFromBytesAsyns(string fileId, CancellationToken cancellationToken = default)
+    {
+        var bucket = new GridFSBucket(GetMongoDatabase(), _bucketOptions);
+        return await bucket.DownloadAsBytesAsync(new ObjectId(fileId), null, cancellationToken);
+    }
 }

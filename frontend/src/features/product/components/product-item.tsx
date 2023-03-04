@@ -17,7 +17,7 @@ function ProductItem(props: Props){
             <div className="badge bg-dark text-white position-absolute" style={{top: "0.5rem", right: "0.5rem"}}>Sale</div>
           )
         }
-        <img className="card-img-top" src={props.thumbnail ?? defaultThumbnail} alt="..." />
+        <img className="card-img-top" src={props.thumbnail ? `/api/file/download?id=${props.thumbnail}` : defaultThumbnail} alt="..." />
         <div className="card-body p-4">
           <div className="text-center">
             <h5 className="fw-bolder">{props.name}</h5>

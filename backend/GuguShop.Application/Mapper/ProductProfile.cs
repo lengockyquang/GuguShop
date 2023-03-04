@@ -11,7 +11,9 @@ namespace GuguShop.Application.Mapper
             CreateMap<ProductCreateDto, Product>();
             CreateMap<ProductUpdateDto, Product>();
             CreateMap<ProductDto, Product>().ReverseMap();
-            CreateMap<ProductListDto, Product>().ReverseMap();
+            CreateMap<ProductListDto, Product>();
+            CreateMap<Product, ProductListDto>()
+                .ForMember(x => x.Thumbnail, map => map.MapFrom(y => y.ImageId));
         }
     }
 }

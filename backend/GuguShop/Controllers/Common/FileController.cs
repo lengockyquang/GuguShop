@@ -27,6 +27,14 @@ public class FileController : Controller
        return Ok(result);
     }
 
+    [HttpGet("download")]
+    public async Task<ActionResult> HandleDownloadFileAction(Guid id,CancellationToken cancellationToken)
+    {
+        var result = await _mongoFileService.Download(id);
+        return File(result, "image/png");
+    }
+
+
     [HttpPost("upload-physical")]
     [RequestSizeLimit(CommonConstants.RequestSizeLimit)]
     public async Task<ActionResult> HandleUpdatePhysicalAction(IFormFile file, CancellationToken cancellationToken)

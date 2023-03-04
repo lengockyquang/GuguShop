@@ -11,5 +11,6 @@ namespace GuguShop.GridFsApplication.Services
 
         IMongoCollection<TDocument> GetMongoCollection<TDocument>(string collectionName) where TDocument : class;
         Task<ObjectId> UploadFromBytesAsync(string fileName, byte[] bytes, CancellationToken cancellationToken = default);
+        Task<byte[]> DownloadFromBytesAsyns(string fileId, CancellationToken cancellationToken = default);
     }
 }

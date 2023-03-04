@@ -13,5 +13,7 @@ namespace GuguShop.Application.Dto
         
         public Guid ManufacturerId { get; set; }
         public ManufacturerListDto Manufacturer { get; set; }
+
+        public string Thumbnail { get; set; }
     }
 }

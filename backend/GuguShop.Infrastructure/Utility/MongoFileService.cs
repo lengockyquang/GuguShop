@@ -30,9 +30,21 @@ namespace GuguShop.Infrastructure.Utility
             throw new NotImplementedException();
         }
 
-        public Task<Tuple<string, string>> GetFileLocation(Guid id)
+        public async Task<byte[]> Download(Guid id)
         {
-            throw new NotImplementedException();
+            var fileLocation = await GetFileLocation(id);
+            return await _baseMongoClient.DownloadFromBytesAsyns(fileLocation.Item1);
+        }
+
+        public async Task<Tuple<string, string>> GetFileLocation(Guid id)
+        {
+            var fileEntity = await _fileRepository.Get(id);
+            if (fileEntity == null)
+            {
+                _logger.LogInformation("Can not find file entity with id {0}", id);
+                return new Tuple<string, string>(string.Empty, string.Empty);
+            }
+            return new Tuple<string, string>(fileEntity.Location, fileEntity.Extensions);
         }
 
         public Task<bool> IsExistAsync(Guid id)
