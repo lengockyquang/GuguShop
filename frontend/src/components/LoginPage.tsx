@@ -4,34 +4,37 @@ import { useNavigate } from 'react-router-dom';
 import { setAuth } from '../redux/identitySlice';
 import {  loginAsync, okStatusCode } from '../services/identity.service';
 import { displayErrorNotify } from '../utils/common';
+import { useCallback } from 'react';
 function LoginPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const onSubmit = async (values: any) => {
-        const response = await loginAsync(values);
-        if(response.status !== okStatusCode)
-        {
-            displayErrorNotify("Please contact your administrator !");
-        }
-        else
-        {
-            const data = response.data;
-            if(!data.succeeded)
-            {
-                displayErrorNotify("Please recheck your login info and try again !");
-            }
-            else
-            {
-                dispatch(setAuth({
-                    isAuthenticated: data.isAuthenticated,
-                    userName: data.userName
-                }));
-                navigate('/');
-                // eslint-disable-next-line no-undef
-                window.location.reload();
-            }
-        }
-    };
+    
+    const onSubmit = useCallback(async (values: any) => {
+        console.log(values);
+        // const response = await loginAsync(values);
+        // if(response.status !== okStatusCode)
+        // {
+        //     displayErrorNotify("Please contact your administrator !");
+        // }
+        // else
+        // {
+        //     const data = response.data;
+        //     if(!data.succeeded)
+        //     {
+        //         displayErrorNotify("Please recheck your login info and try again !");
+        //     }
+        //     else
+        //     {
+        //         dispatch(setAuth({
+        //             isAuthenticated: data.isAuthenticated,
+        //             userName: data.userName
+        //         }));
+        //         navigate('/');
+        //         // eslint-disable-next-line no-undef
+        //         window.location.reload();
+        //     }
+        // }
+    }, [])
 
     return (
         <div className='login'>

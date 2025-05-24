@@ -33,7 +33,7 @@ namespace GuguShop.Infrastructure.Utility
         public async Task<byte[]> Download(Guid id)
         {
             var fileLocation = await GetFileLocation(id);
-            return await _baseMongoClient.DownloadFromBytesAsyns(fileLocation.Item1);
+            return await _baseMongoClient.DownloadFromBytesAsync(fileLocation.Item1);
         }
 
         public async Task<Tuple<string, string>> GetFileLocation(Guid id)

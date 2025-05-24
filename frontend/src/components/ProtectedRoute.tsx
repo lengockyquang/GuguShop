@@ -5,8 +5,7 @@ import { identitySelector } from '../redux/selector';
 import Forbidden from './Forbidden';
 
 function ProtectedRoute() {
-    const identityInfo = useSelector(identitySelector);
-    const {isAuthenticated} = identityInfo;
+    const {isAuthenticated} = useSelector(identitySelector);
     return isAuthenticated ? (
         <Outlet/>
     ) : <Forbidden />

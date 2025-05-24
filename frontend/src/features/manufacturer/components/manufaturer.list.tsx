@@ -5,16 +5,25 @@ import useTable from '../../../hooks/useTable';
 import { loadManufacturers } from '../../../services/manufacturer.service';
 import { ManufacturerColumnsConfig } from '../configs/grid.config';
 import ManufacturerCreateForm from './manufacturer.create-form';
+import ManufacturerEditForm from './manufacturer.edit-form';
 
 function ManufacturerList() {
-  const createModalRef = useRef<ApplicationModalRef>(null);
+    const createModalRef = useRef<ApplicationModalRef>(null);
+
+    const editModalRef = useRef<ApplicationModalRef>(null);
+    const openEditForm = () =>{
+        editModalRef.current?.onOpen();
+    }
+    
     const [renderTable, loadData] = useTable({
         api: loadManufacturers,
-        columns: ManufacturerColumnsConfig
+        columns: ManufacturerColumnsConfig({
+            openEditModal: openEditForm
+        })
     });
 
     const openCreateForm = () => {
-      createModalRef.current?.onOpen();
+        createModalRef.current?.onOpen();
     }
 
     const renderCreateModal = () => {
@@ -33,6 +42,17 @@ function ManufacturerList() {
         )
     }
 
+    const renderEditModal = () => {
+        return (
+            <ApplicationModal
+                ref={editModalRef}
+                title='Cập nhật'
+                content={<ManufacturerEditForm />}
+                maskClosable={false}
+            />
+        )
+    }
+
     return (
         <div style={{ padding: 10 }}>
             <Button type="primary" onClick={openCreateForm}>
@@ -40,6 +60,7 @@ function ManufacturerList() {
             </Button>
             {renderTable()}
             {renderCreateModal()}
+            {renderEditModal()}
         </div>
     )
 }

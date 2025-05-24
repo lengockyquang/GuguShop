@@ -1,3 +1,5 @@
+import { Space } from 'antd';
+import { Category } from '../../../domain/category';
 
 
 export const CategoryColumnsConfig = [
@@ -9,4 +11,15 @@ export const CategoryColumnsConfig = [
         title: 'Tên',
         dataIndex: 'name',
         key: 'name',
-    }]
+    },
+    {
+        title: 'Hành động',
+        key: 'action',
+        render: (item: Category) => (
+            <Space size="middle">
+                <a>Invite {item.name}</a>
+                <a>Delete</a>
+            </Space>
+        ),
+    }
+]
